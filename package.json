@@ -1,4 +1,21 @@
 {
   "name": "esdoctor",
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.6.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "oxlint",
+    "build": "nx run-many -t build"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@yarnpkg/types": "^4.0.0",
+    "nx": "20.4.0",
+    "oxlint": "^0.15.9",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

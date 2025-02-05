@@ -11,3 +11,10 @@
 
 #!.yarn/cache
 .pnp.*
+
+# nx
+.nx/cache
+.nx/workspace-data
+
+# dist
+dist

@@ -1,0 +1,18 @@
+{
+  "name": "@esdoctor/plugin",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsup": "^8.3.6",
+    "typescript": "5.7.3"
+  }
+}

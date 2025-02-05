@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/oxlint_v0.15.9/npm/oxlint/configuration_schema.json",
+  "plugins": ["import", "typescript", "oxc"],
+  "env": {
+    "node": true
+  },
+  "categories": {
+    "correctness": "warn"
+  },
+  "rules": {
+    "eqeqeq": "off",
+    "import/no-cycle": "error",
+    "no-default-export": "error",
+    "no-explicit-any": "error",
+    "no-non-null-assertion": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/index.*", "**/*.config.*"],
+      "rules": {
+        "no-default-export": "off"
+      }
+    }
+  ]
+}
