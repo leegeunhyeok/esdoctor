@@ -1,4 +1,4 @@
-# plugin
+# @esdoctor/plugin
 
 ## Installation
 
