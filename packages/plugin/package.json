@@ -5,6 +5,8 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
     "build": "tsup"
   },
   "files": [
@@ -12,7 +14,9 @@
   ],
   "devDependencies": {
     "@types/node": "^22",
+    "esbuild": "^0.24.2",
     "tsup": "^8.3.6",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "vitest": "^3.0.5"
   }
 }
