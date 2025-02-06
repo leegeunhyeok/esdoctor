@@ -55,7 +55,7 @@ describe('@esdoctor/plugin', () => {
             ...getBaseBuildOptions(),
             metafile: false,
             plugins: [esdoctor.plugin, esdoctor.bind(TEMPLATE.fooResolver())],
-          })
+          }),
         ).rejects.toThrowError();
       });
     });
@@ -93,7 +93,7 @@ describe('@esdoctor/plugin', () => {
 
         const traceNames = result.traces.map((trace) => trace.name);
         const hasNonBoundPluginTrace = traceNames.some((name) =>
-          name.includes('non-bound-plugin')
+          name.includes('non-bound-plugin'),
         );
 
         expect(hasNonBoundPluginTrace).toBe(false);
@@ -132,7 +132,7 @@ describe('@esdoctor/plugin', () => {
             ...getBaseBuildOptions(),
             metafile: false,
             plugins: [esdoctor.plugin, esdoctor.bind(TEMPLATE.fooResolver())],
-          })
+          }),
         ).resolves.toBeDefined();
       });
     });

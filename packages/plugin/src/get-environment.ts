@@ -22,6 +22,6 @@ function getCpuInfo() {
       ...acc,
       [cpu.model]: (acc[cpu.model] || 0) + 1,
     }),
-    {} as Environment['cpu']
+    {} as Environment['cpu'],
   );
 }

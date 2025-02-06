@@ -1,7 +1,7 @@
 import type * as esbuild from 'esbuild';
 
 export type BuildResult<
-  ProvidedOptions extends esbuild.BuildOptions = esbuild.BuildOptions
+  ProvidedOptions extends esbuild.BuildOptions = esbuild.BuildOptions,
 > = esbuild.BuildResult<ProvidedOptions> & {
   environment: Environment;
   startedAt: number;

@@ -1,4 +1,33 @@
 {
   "name": "@esdoctor/frontend",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development concurrently \"rspack serve\" \"yarn watch:css\"",
+    "build": "cross-env NODE_ENV=production rspack build",
+    "watch:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css --watch",
+    "build:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.474.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.2.2",
+    "@rspack/core": "^1.2.2",
+    "@rspack/plugin-react-refresh": "1.0.0",
+    "@tailwindcss/cli": "^4.0.4",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "react-refresh": "^0.14.0",
+    "tailwindcss": "^4.0.4",
+    "typescript": "5.7.3"
+  }
 }

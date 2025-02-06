@@ -54,7 +54,7 @@ function bindPlugin(this: PluginState, plugin: Plugin): Plugin {
         build.onStart(() =>
           this.withTrace(() => callback(), {
             name: traceName,
-          }).perform()
+          }).perform(),
         );
       },
       onResolve: (options, callback) => {
@@ -65,7 +65,7 @@ function bindPlugin(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(result), {
             name: traceName,
             data: traceData,
-          }).perform()
+          }).perform(),
         );
       },
       onLoad: (options, callback) => {
@@ -76,14 +76,14 @@ function bindPlugin(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(result), {
             name: traceName,
             data: traceData,
-          }).perform()
+          }).perform(),
         );
       },
       onDispose: (callback) => {
         const traceName = `${name}@onDispose`;
 
         build.onDispose(() =>
-          this.withTrace(() => callback(), { name: traceName }).perform()
+          this.withTrace(() => callback(), { name: traceName }).perform(),
         );
       },
       onEnd: (callback) => {
@@ -92,7 +92,7 @@ function bindPlugin(this: PluginState, plugin: Plugin): Plugin {
         build.onEnd((result) =>
           this.withTrace(() => callback(result), {
             name: traceName,
-          }).perform()
+          }).perform(),
         );
       },
     });

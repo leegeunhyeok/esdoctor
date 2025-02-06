@@ -4,9 +4,12 @@
     "**/.pnp.*": true
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
     "esdoctor",
-    "metafile"
-  ]
+    "metafile",
+    "rspack"
+  ],
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }

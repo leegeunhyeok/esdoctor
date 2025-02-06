@@ -46,7 +46,7 @@ export class PluginState {
     config: {
       name: string;
       data?: T;
-    }
+    },
   ) {
     const originStack = new Error().stack;
     const start = performance.now();
