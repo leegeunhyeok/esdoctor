@@ -1,20 +1,16 @@
-'use client';
-
-import { Card, CardContent } from '@/components/ui/card';
 import { useState, useRef, useEffect } from 'react';
-import { Moon, Sun } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
-const tabs = [
-  'Overview',
-  'Integrations',
-  'Activity',
-  'Domains',
-  'Usage',
-  'Monitoring',
-];
+interface TabBarProps {
+  tabs: TabItem[];
+  onTabClick?: (id: string) => void;
+}
 
-export function TabBar() {
+export interface TabItem {
+  id: string;
+  label: string;
+}
+
+export function TabBar({ tabs, onTabClick }: TabBarProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverStyle, setHoverStyle] = useState({});
@@ -24,6 +20,11 @@ export function TabBar() {
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleTabClick = (id: string, index: number) => {
+    setActiveIndex(index);
+    onTabClick?.(id);
+  };
 
   useEffect(() => {
     if (hoveredIndex !== null) {
@@ -69,7 +70,7 @@ export function TabBar() {
 
   return (
     <div
-      className={`fixed relative inset-x-0 top-0 z-10 flex w-full flex-col items-center justify-center gap-4 border-b border-gray-950/5 px-4 shadow-none dark:border-white/10 ${
+      className={`fixed relative inset-x-0 top-0 z-10 flex w-full flex-col items-center justify-center gap-4 border-b border-gray-950/5 bg-white px-4 shadow-none dark:border-white/10 ${
         isDarkMode ? 'bg-transparent' : ''
       }`}
     >
@@ -95,7 +96,7 @@ export function TabBar() {
           <div className="relative flex items-center space-x-[6px]">
             {tabs.map((tab, index) => (
               <div
-                key={index}
+                key={tab.id}
                 ref={(el) => (tabRefs.current[index] = el)}
                 className={`h-[30px] cursor-pointer px-3 py-2 transition-colors duration-300 ${
                   index === activeIndex
@@ -104,10 +105,10 @@ export function TabBar() {
                 }`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => handleTabClick(tab.id, index)}
               >
-                <div className="flex h-full items-center justify-center whitespace-nowrap text-sm font-[var(--www-mattmannucci-me-geist-regular-font-family)] leading-5">
-                  {tab}
+                <div className="flex h-full items-center justify-center text-sm leading-5 font-[var(--www-mattmannucci-me-geist-regular-font-family)] whitespace-nowrap">
+                  {tab.label}
                 </div>
               </div>
             ))}

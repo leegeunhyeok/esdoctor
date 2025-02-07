@@ -9,7 +9,8 @@
   "cSpell.words": [
     "esdoctor",
     "metafile",
-    "rspack"
+    "rspack",
+    "treemap"
   ],
   "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }

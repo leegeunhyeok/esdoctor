@@ -2,6 +2,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
+import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import RefreshPlugin from '@rspack/plugin-react-refresh';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -22,7 +23,6 @@ export default defineConfig({
       directory: resolve(__dirname, 'dist'),
     },
   },
-  target: isDev ? 'async-node' : undefined,
   resolve: {
     extensions: ['...', '.ts', '.tsx', '.jsx'],
     pnp: true,
@@ -67,6 +67,7 @@ export default defineConfig({
       template: './index.html',
     }),
     isDev ? new RefreshPlugin() : null,
+    process.env.RSDOCTOR ? new RsdoctorRspackPlugin() : null
   ].filter(Boolean),
   optimization: {
     minimizer: [
