@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TabBar } from './components/TabBar';
 import { Overview } from './pages/Overview';
-import { Analyze } from './pages/Analyze';
+import { Analyze } from './pages/Analyze/Analyze';
 
 const pages = [
   {

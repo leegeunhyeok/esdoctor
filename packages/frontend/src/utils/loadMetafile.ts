@@ -1,4 +1,4 @@
-import * as esbuild from 'esbuild';
+import type * as esbuild from 'esbuild';
 import metafile from '../metafile.json';
 
 // TODO: Get metafile from global
