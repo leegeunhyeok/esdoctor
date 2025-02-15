@@ -1,6 +1,8 @@
-import type * as esbuild from 'esbuild';
+import type { ChartData } from '@/src/utils/chart';
+import type { TreemapSeriesOption, SunburstSeriesOption } from 'echarts';
 
 export interface ChartContentProps {
-  data: esbuild.Metafile;
+  data: ChartData;
+  options?: TreemapSeriesOption | SunburstSeriesOption;
   show: boolean;
 }

@@ -1,18 +1,25 @@
-import { useState } from 'react';
-import { TabBar } from './components/TabBar';
-import { Overview } from './pages/Overview';
-import { Analyze } from './pages/Analyze/Analyze';
+import { memo } from 'react';
+import { NavBar } from './components/navbar';
+import { Overview } from './pages/overview';
+import { Analyze } from './pages/analyze';
+import { Timeline } from './pages/timeline';
+import { TabProvider, useTab } from './hooks/use-tab';
 
 const pages = [
   {
     id: 'overview',
     label: 'Overview',
-    component: Overview,
+    component: memo(Overview),
+  },
+  {
+    id: 'timeline',
+    label: 'Timeline',
+    component: memo(Timeline),
   },
   {
     id: 'analyze',
     label: 'Analyze',
-    component: Analyze,
+    component: memo(Analyze),
   },
 ];
 
@@ -22,15 +29,19 @@ const tabs = pages.map((page) => ({
 }));
 
 export function App() {
-  const [activeTab, setActiveTab] = useState(pages[0].id);
+  return (
+    <TabProvider initialTab={pages[0].id}>
+      <TabPage />
+    </TabProvider>
+  );
+}
 
-  const handleTabClick = (id: string) => {
-    setActiveTab(id);
-  };
+function TabPage() {
+  const { activeTab } = useTab();
 
   return (
     <div className="h-full w-full min-w-[800px]">
-      <TabBar tabs={tabs} onTabClick={handleTabClick} />
+      <NavBar menus={tabs} />
       {pages.map(({ component: Component, id }) => (
         <div key={id} className={activeTab === id ? 'block' : 'hidden'}>
           <Component />

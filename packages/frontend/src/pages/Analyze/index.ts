@@ -1,1 +1,1 @@
-export { Analyze } from './Analyze';
+export { Analyze } from './analyze';

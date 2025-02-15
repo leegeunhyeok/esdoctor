@@ -120,14 +120,14 @@ function optimizeNestedPath(data: ChartData[]) {
 }
 
 export function getTreemapSeries(
-  data: ChartData[],
+  data: ChartData,
   additionalOptions: echarts.TreemapSeriesOption = {},
 ): echarts.TreemapSeriesOption {
   return merge(
     {
       type: 'treemap',
-      name: data[0].name,
-      data: data[0].children,
+      name: data.name,
+      data: data.children,
       width: '100%',
       height: '100%',
       label: {
@@ -182,3 +182,27 @@ export function getTreemapSeries(
     additionalOptions,
   );
 }
+
+export const getSunburstSeries = (
+  data: ChartData,
+  additionalOptions: echarts.SunburstSeriesOption = {},
+): echarts.SunburstSeriesOption => {
+  return merge(
+    {
+      type: 'sunburst',
+      radius: ['5%', '90%'],
+      nodeClick: 'rootToNode',
+      animationDurationUpdate: 500,
+      data: data.children,
+      universalTransition: true,
+      itemStyle: {
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,.5)',
+      },
+      label: {
+        show: false,
+      },
+    },
+    additionalOptions,
+  );
+};
