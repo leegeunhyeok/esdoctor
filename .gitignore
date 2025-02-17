@@ -27,3 +27,6 @@ metafile.json
 
 # esdoctor
 esdoctor.json
+
+# misc
+.DS_Store
