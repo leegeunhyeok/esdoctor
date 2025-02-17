@@ -1,0 +1,7 @@
+<svg width="740" height="250" fill="black" font-family="sans-serif" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="140" cy="125" r="100" fill="#FFCF00"/>
+  <polyline points="60,125 100,125 120,85 160,165 180,125 220,125"
+            fill="none" stroke="#191919" stroke-width="24" />
+  <text x="280" y="152" font-size="100" font-weight="bold">esdoctor</text>
+  <text x="280" y="184" font-size="21" font-style="italic">An analyzer for build results and bundle sizes.</text>
+</svg>
