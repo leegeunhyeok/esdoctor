@@ -1,124 +1,97 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import {
+  forwardRef,
+  memo,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import * as echarts from 'echarts';
-import { isNotNil } from 'es-toolkit';
 import { cn } from '@/lib/utils';
-import { bytesToText } from '../utils/filesize';
-import { getTreemapSeries } from '../utils/chart';
 
 export interface ChartProps {
-  data: ChartData[];
-  options?: echarts.TreemapSeriesOption | echarts.SunburstSeriesOption;
-  type: ChartType;
+  options: echarts.EChartsOption;
+  series: echarts.SeriesOption;
   className?: string;
 }
 
-export interface ChartData {
-  name?: string;
-  path: string;
-  value: number | undefined;
-  size: number | undefined;
-  children?: ChartData[];
+export interface ChartRef {
+  getChart: () => echarts.ECharts | null;
 }
 
-export type ChartType = 'treemap' | 'sunburst';
+const UNRECOGNIZED_SIZE = { width: -1, height: -1 };
 
-export function Chart({ data, options, className }: ChartProps) {
-  const chartRef = useRef<HTMLDivElement>(null);
-  const memoizedData = useMemo(() => data, [data]);
-  const dataRef = useRef(memoizedData);
+function isInvisible(width: number, height: number) {
+  return width === 0 || height === 0;
+}
 
-  const initialize = useCallback(() => {
-    if (chartRef.current == null) {
-      return;
-    }
+function initialize(element: HTMLElement) {
+  const existingChart = echarts.getInstanceByDom(element);
 
-    const chart = echarts.init(chartRef.current);
-    chart.setOption<echarts.EChartsOption>({
-      tooltip: {
-        formatter: (params) => {
-          const { path, value: bundledSize, size: originalSize } = params.data;
-          const isModule = typeof originalSize === 'number';
+  if (existingChart != null) {
+    return existingChart;
+  }
 
-          if (path == null) {
-            return '';
-          }
+  return echarts.init(element);
+}
 
-          return [
-            `<div class="chart-tooltip">`,
-            isModule
-              ? `<div class="value">Bundled Size: ${bytesToText(bundledSize)}</div>`
-              : null,
-            isModule && typeof originalSize === 'number'
-              ? `<div class="value">Original Size: ${bytesToText(originalSize)}</div>`
-              : null,
-            `<div>Path: ${path}</div>`,
-            `</>`,
-          ]
-            .filter(isNotNil)
-            .join('');
-        },
-      },
-      series: [],
-    });
+export const Chart = memo(
+  forwardRef<ChartRef, ChartProps>(function Chart(
+    { options, series, className }: ChartProps,
+    ref,
+  ) {
+    const chartRef = useRef<echarts.ECharts | null>(null);
+    const elementRef = useRef<HTMLDivElement>(null);
+    const sizeRef = useRef(UNRECOGNIZED_SIZE);
 
-    return chart;
-  }, [chartRef]);
+    useEffect(() => {
+      if (elementRef.current == null) {
+        return;
+      }
 
-  useEffect(() => {
-    if (chartRef.current == null) {
-      return;
-    }
+      const element = elementRef.current;
+      const chart = (chartRef.current = initialize(element));
+      const observer = new ResizeObserver(() => {
+        if (elementRef.current == null) {
+          return;
+        }
 
-    const observer = new ResizeObserver(() => {
-      chartRef.current && echarts.getInstanceByDom(chartRef.current)?.resize();
-    });
+        const { width: prevWidth, height: prevHeight } = sizeRef.current;
+        const { width, height } = elementRef.current.getBoundingClientRect();
 
-    observer.observe(chartRef.current);
+        if (isInvisible(width, height)) {
+          return;
+        }
 
-    return () => observer.disconnect();
-  }, [chartRef]);
+        sizeRef.current = { width, height };
 
-  useEffect(() => {
-    if (chartRef.current == null) {
-      return;
-    }
+        if (prevWidth !== width || prevHeight !== height) {
+          chart.resize();
+        }
+      });
 
-    initialize();
-  }, []);
+      chart.setOption({ ...options, series: [series] });
+      observer.observe(element);
 
-  useEffect(() => {
-    if (chartRef.current == null) {
-      return;
-    }
+      return () => observer.disconnect();
+    }, [options, series]);
 
-    let chart = echarts.getInstanceByDom(chartRef.current);
-
-    if (dataRef.current !== memoizedData) {
-      chart?.dispose();
-      chart = initialize();
-    }
-
-    chart?.setOption(
-      {
-        series: [
-          getTreemapSeries(
-            memoizedData,
-            options as echarts.TreemapSeriesOption,
-          ),
-        ],
-      },
-      { notMerge: false },
+    useImperativeHandle(
+      ref,
+      () => ({
+        getChart: () => chartRef.current,
+      }),
+      [],
     );
-  }, [memoizedData, options]);
 
-  return (
-    <div
-      className={cn(
-        'flex h-[50vh] h-full min-h-[400px] w-full items-stretch',
-        className,
-      )}
-    >
-      <div ref={chartRef} style={{ width: '100%' }} />
-    </div>
-  );
-}
+    return (
+      <div
+        className={cn(
+          'flex h-[50vh] h-full min-h-[400px] w-full items-stretch',
+          className,
+        )}
+      >
+        <div ref={elementRef} style={{ width: '100%' }} />
+      </div>
+    );
+  }),
+);

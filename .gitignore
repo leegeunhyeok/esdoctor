@@ -21,3 +21,9 @@ dist
 
 # vite
 node_modules
+
+# esbuild
+metafile.json
+
+# esdoctor
+esdoctor.json

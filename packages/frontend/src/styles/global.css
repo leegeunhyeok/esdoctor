@@ -92,7 +92,7 @@
 
 @layer base {
   :root {
-    --background: var(--color-neutral-50);
+    --background: var(--color-white);
     --foreground: var(--color-neutral-900);
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(0 0% 3.9%);
@@ -172,4 +172,8 @@
   to {
     height: 0;
   }
+}
+
+button {
+  @apply cursor-pointer;
 }

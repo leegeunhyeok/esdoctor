@@ -1,5 +1,5 @@
 import os from 'node:os';
-import type { Environment } from './types.js';
+import type { Environment } from '@esdoctor/types';
 
 let cachedValue: Environment | undefined;
 

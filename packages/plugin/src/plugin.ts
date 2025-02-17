@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: PluginOptions = {
 
 export function create(options: PluginOptions = DEFAULT_OPTIONS): {
   plugin: Plugin;
-  bind: (plugin: Plugin) => Plugin;
+  trace: (plugin: Plugin) => Plugin;
 } {
   const state = new PluginState();
   const plugin: Plugin = {
@@ -21,7 +21,7 @@ export function create(options: PluginOptions = DEFAULT_OPTIONS): {
         return;
       }
 
-      if (!build.initialOptions?.metafile) {
+      if (build.initialOptions?.metafile !== true) {
         throw new Error('enable `metafile` option to use the plugin');
       }
 
@@ -32,66 +32,71 @@ export function create(options: PluginOptions = DEFAULT_OPTIONS): {
 
       build.onEnd((result) => {
         state.end();
-        PluginState.extends(state, result);
+        PluginState.extend(state, result);
       });
     },
   };
 
   return {
     plugin,
-    bind: options.enabled ? bindPlugin.bind(state) : (plugin) => plugin,
+    trace: options.enabled ? withTraceImpl.bind(state) : withTraceShim,
   };
 }
 
-function bindPlugin(this: PluginState, plugin: Plugin): Plugin {
+function withTraceShim(plugin: Plugin): Plugin {
+  return plugin;
+}
+
+function withTraceImpl(this: PluginState, plugin: Plugin): Plugin {
   const name = plugin.name;
   const setup: Plugin['setup'] = (build) => {
     return plugin.setup?.({
       ...build,
       onStart: (callback) => {
-        const traceName = `${name}@onStart`;
-
         build.onStart(() =>
           this.withTrace(() => callback(), {
-            name: traceName,
+            type: 'onStart',
+            name,
           }).perform(),
         );
       },
       onResolve: (options, callback) => {
-        const traceName = `${name}@onResolve`;
-        const traceData = { options };
-
         build.onResolve(options, (result) =>
           this.withTrace(() => callback(result), {
-            name: traceName,
-            data: traceData,
+            type: 'onResolve',
+            name,
+            data: {
+              options,
+              args: result,
+            },
           }).perform(),
         );
       },
       onLoad: (options, callback) => {
-        const traceName = `${name}@onLoad`;
-        const traceData = { options };
-
         build.onLoad(options, (result) =>
           this.withTrace(() => callback(result), {
-            name: traceName,
-            data: traceData,
+            type: 'onLoad',
+            name,
+            data: {
+              options,
+              args: result,
+            },
           }).perform(),
         );
       },
       onDispose: (callback) => {
-        const traceName = `${name}@onDispose`;
-
         build.onDispose(() =>
-          this.withTrace(() => callback(), { name: traceName }).perform(),
+          this.withTrace(() => callback(), {
+            type: 'onDispose',
+            name,
+          }).perform(),
         );
       },
       onEnd: (callback) => {
-        const traceName = `${name}@onEnd`;
-
         build.onEnd((result) =>
           this.withTrace(() => callback(result), {
-            name: traceName,
+            type: 'onEnd',
+            name,
           }).perform(),
         );
       },

@@ -7,4 +7,5 @@ export default defineConfig({
   clean: true,
   format: ['esm'],
   dts: true,
+  external: ['@esdoctor/types'],
 });

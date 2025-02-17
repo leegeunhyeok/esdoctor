@@ -1,0 +1,12 @@
+{
+  "name": "@esdoctor/types",
+  "types": "./dist/index.d.ts",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "typescript": "5.7.3"
+  }
+}

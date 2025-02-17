@@ -67,7 +67,7 @@ export default defineConfig({
       template: './index.html',
     }),
     isDev ? new RefreshPlugin() : null,
-    process.env.RSDOCTOR ? new RsdoctorRspackPlugin() : null
+    process.env.RSDOCTOR ? new RsdoctorRspackPlugin() : null,
   ].filter(Boolean),
   optimization: {
     minimizer: [
