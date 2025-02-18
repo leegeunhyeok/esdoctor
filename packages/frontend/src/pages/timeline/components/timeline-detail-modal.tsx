@@ -8,17 +8,14 @@ import {
 } from '@/components/ui/dialog';
 import { Code } from '@/src/components/code';
 import { formatNumberWithDecimal } from '@/src/utils/format';
+import { toJSON } from '@/src/utils/to-json';
+import type { TimelineData } from '../types';
 
 const CODE_MAX_LENGTH = 1024 * 20;
 
 export interface TimelineDetailModalProps {
   open: boolean;
-  details: {
-    start: number;
-    end: number;
-    data?: string;
-    code?: string;
-  } | null;
+  details: Pick<TimelineData, 'start' | 'end' | 'data' | 'code'> | null;
   onOpenChange: (open: boolean) => void;
 }
 
@@ -69,7 +66,10 @@ export function TimelineDetailModal({
             ms)
           </span>
         </div>
-        {renderCode(details?.data ?? '// No data', 'json')}
+        {renderCode(
+          details?.data ? toJSON(details.data) : '// No data',
+          'json',
+        )}
         {details?.code ? renderCode(details.code, 'javascript') : null}
       </DialogContent>
     </Dialog>
