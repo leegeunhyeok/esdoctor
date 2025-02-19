@@ -9,6 +9,16 @@ interface TimelineChartProps {
   traceNameIndexMap: Record<string, number>;
 }
 
+const COLORS = [
+  '#3b82f6',
+  '#eab308',
+  '#f43f5e',
+  '#22c55e',
+  '#8b5cf6',
+  '#f97316',
+  '#2dd4bf',
+];
+
 export function TimelineChart({
   data,
   min,
@@ -27,16 +37,12 @@ export function TimelineChart({
             return [
               `${value[2]}`,
               `Trace count: ${value[3]}`,
-              `Duration: ${formatNumberWithDecimal(value[1] - value[0])}ms`,
-              `Start: ${formatNumberWithDecimal(value[0])} ms`,
-              `End: ${formatNumberWithDecimal(value[1])} ms`,
+              `Total duration: ${formatNumberWithDecimal(value[1] - value[0])}ms`,
+              `Started from: ${formatNumberWithDecimal(value[0])} ms`,
+              `Ended at: ${formatNumberWithDecimal(value[1])} ms`,
             ].join('<br>');
           },
           borderColor: 'var(--border)',
-        },
-        legend: {
-          data: traceNames,
-          selectedMode: 'multiple',
         },
         grid: {
           left: 0,
@@ -48,7 +54,7 @@ export function TimelineChart({
         xAxis: {
           type: 'time',
           min,
-          max,
+          max: max + 10,
           boundaryGap: [0, 0],
           axisLabel: {
             formatter: (value) => `${formatInteger(value)} ms`,
@@ -56,7 +62,8 @@ export function TimelineChart({
         },
         yAxis: {
           type: 'category',
-          data: traceNames,
+          data: traceNames.reverse(),
+          inverse: true,
           axisLabel: {
             fontSize: 10,
           },
@@ -77,9 +84,9 @@ export function TimelineChart({
           const startValue = api.value(0);
           const endValue = api.value(1);
           const label = api.value(2);
-          const baseCategoryIndex = traceNameIndexMap[label];
-          const start = api.coord([startValue, baseCategoryIndex]);
-          const end = api.coord([endValue, baseCategoryIndex]);
+          const categoryIndex = traceNameIndexMap[label];
+          const start = api.coord([startValue, categoryIndex]);
+          const end = api.coord([endValue, categoryIndex]);
           const height = api.size?.([0, 1])[1] * 0.8;
 
           return {
@@ -87,21 +94,13 @@ export function TimelineChart({
             shape: {
               x: start[0],
               y: start[1] - height / 2,
-              width: end[0] - start[0],
+              width: Math.max(end[0] - start[0], 3),
               height: height,
               r: 2,
             },
             style: {
               ...api.style(),
-              fill: [
-                '#3b82f6',
-                '#eab308',
-                '#f43f5e',
-                '#22c55e',
-                '#8b5cf6',
-                '#f97316',
-                '#2dd4bf',
-              ][baseCategoryIndex % 7],
+              fill: COLORS[categoryIndex % COLORS.length],
             },
           };
         },

@@ -26,7 +26,7 @@ export function createTimelineData(traceList: HookTrace[]) {
   });
 
   const traceNames = Array.from(
-    new Set(labelNames.sort((a, b) => (a > b ? -1 : 0))),
+    new Set(labelNames.sort((a, b) => (a > b ? -1 : 1))),
   );
 
   const traceNameIndexMap = Object.fromEntries(
