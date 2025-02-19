@@ -8,7 +8,7 @@ export function formatInteger(value: number) {
   return formatter?.format(value) ?? value.toString();
 }
 
-export function formatNumberWithDecimal(value: number) {
-  const segments = value.toFixed(1).split('.', 2);
+export function formatNumberWithDecimal(value: number, fractionDigits = 1) {
+  const segments = value.toFixed(fractionDigits).split('.', 2);
   return formatInteger(+segments[0]) + '.' + segments[1];
 }

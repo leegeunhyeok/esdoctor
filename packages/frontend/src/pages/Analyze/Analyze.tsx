@@ -5,6 +5,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { Page } from '@/src/components/page';
 import { Select } from '@/src/components/select';
@@ -82,7 +83,9 @@ export function Analyze() {
             forceMount
           >
             <Card>
-              <CardHeader>Treemap Chart</CardHeader>
+              <CardHeader>
+                <CardTitle>Treemap Chart</CardTitle>
+              </CardHeader>
               <CardContent className="flex flex-col gap-4">
                 <CardDescription>
                   This visualization shows which input files were placed into
@@ -99,7 +102,9 @@ export function Analyze() {
             forceMount
           >
             <Card>
-              <CardHeader>Sunburst Chart</CardHeader>
+              <CardHeader>
+                <CardTitle>Sunburst Chart</CardTitle>
+              </CardHeader>
               <CardContent className="flex flex-col gap-4">
                 <CardDescription>
                   This visualization shows how much space each input file takes

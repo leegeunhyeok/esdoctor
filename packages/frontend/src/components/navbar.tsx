@@ -42,7 +42,7 @@ export function NavBar({ menus }: TabBarProps) {
               points="20,100 60,100 80,60 120,140 140,100 180,100"
               fill="none"
               stroke="#191919"
-              stroke-width="24"
+              strokeWidth="24"
             />
           </svg>
         </div>

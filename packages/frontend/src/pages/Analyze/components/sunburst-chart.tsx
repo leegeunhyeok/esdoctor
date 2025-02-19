@@ -4,6 +4,11 @@ import type { ChartData } from '@/src/utils/chart';
 import { bytesToText } from '@/src/utils/filesize';
 import { useSunburstSeries } from '../hooks/use-sunburst-series';
 import { tooltip } from '../tooltip';
+import { ModuleReferenceTreeModal } from './module-reference-tree-modal';
+import {
+  EMPTY_MODULE,
+  useModuleReferenceTreeModalState,
+} from '../hooks/use-module-reference-tree-modal-state';
 
 export interface SunburstChartProps {
   data: ChartData;
@@ -11,15 +16,25 @@ export interface SunburstChartProps {
 }
 
 export function SunburstChart({ data, options }: SunburstChartProps) {
+  const { chartRef, moduleItem, reset } = useModuleReferenceTreeModalState();
   const series = useSunburstSeries(data, options);
   const chartOptions = useMemo(() => getChartOptions(data.value ?? 0), [data]);
 
   return (
-    <Chart
-      className="h-[70vh] bg-neutral-50"
-      series={series}
-      options={chartOptions}
-    />
+    <>
+      <Chart
+        ref={chartRef}
+        className="h-[70vh] bg-neutral-50"
+        series={series}
+        options={chartOptions}
+      />
+      <ModuleReferenceTreeModal
+        open={Boolean(moduleItem)}
+        module={moduleItem?.module ?? EMPTY_MODULE}
+        referenceStack={moduleItem?.referenceStack ?? []}
+        onOpenChange={reset}
+      />
+    </>
   );
 }
 
