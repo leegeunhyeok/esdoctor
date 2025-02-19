@@ -44,8 +44,14 @@ export function ChartControlModal({
     initialOptions.leafDepth ?? MAX_LEAF_DEPTH,
   );
 
+  const reset = () => {
+    setIncludeFilter(initialOptions.includeFilter ?? '');
+    setExcludeFilter(initialOptions.excludeFilter ?? '');
+    setLeafDepth(initialOptions.leafDepth ?? MAX_LEAF_DEPTH);
+  };
+
   return (
-    <Dialog modal>
+    <Dialog modal onOpenChange={(open) => open && reset()}>
       <DialogTrigger asChild>
         <Button variant="outline" size="icon">
           <SettingsIcon />
