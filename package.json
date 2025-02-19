@@ -12,6 +12,7 @@
   "devDependencies": {
     "@types/node": "^22",
     "@yarnpkg/types": "^4.0.0",
+    "knip": "^5.44.4",
     "nx": "20.4.0",
     "oxlint": "^0.15.9",
     "prettier": "^3.4.2",

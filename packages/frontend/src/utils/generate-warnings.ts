@@ -2,7 +2,7 @@ import type * as esbuild from 'esbuild';
 
 export const generatedWarnings = generateWarnings(window.$$dataSource.metafile);
 
-export function generateWarnings(metafile: esbuild.Metafile): string[] {
+function generateWarnings(metafile: esbuild.Metafile): string[] {
   const inputs = metafile.inputs;
   const resolvedPaths: Record<string, string[]> = {};
 
