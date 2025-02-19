@@ -9,7 +9,7 @@
 > [!NOTE]  
 > Release coming soon.
 
-# Preview
+## Preview
 
 ![preview-1](./images/preview-1.png)
 

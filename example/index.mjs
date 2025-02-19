@@ -1,8 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import * as esbuild from 'esbuild';
-import { create, asMetafile } from '@esdoctor/plugin';
+import { setup, asMetafile } from '@esdoctor/plugin';
 
-const esdoctor = create();
 const result = await esbuild.build({
   entryPoints: ['./src/main.tsx'],
   bundle: true,
@@ -11,9 +10,8 @@ const result = await esbuild.build({
   loader: {
     '.svg': 'text',
   },
-  plugins: [
-    esdoctor.plugin,
-    esdoctor.trace({
+  plugins: setup([
+    {
       name: 'example-plugin',
       setup(build) {
         function delay(ms) {
@@ -50,8 +48,8 @@ const result = await esbuild.build({
 
         build.onEnd(() => delay(1));
       },
-    }),
-  ],
+    },
+  ]),
 });
 
 const esdoctorMetafile = asMetafile(result);
