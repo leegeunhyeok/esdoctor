@@ -16,22 +16,11 @@ yarn add @esdoctor/plugin
 ## Usage
 
 ```ts
-import { create } from '@esdoctor/plugin';
-
-const esdoctor = create();
+import * as esdoctor from '@esdoctor/plugin';
 
 esbuild.build({
   /* Other options */
-  plugins: [
-    // The base plugin, which should be placed first in the array.
-    esdoctor.plugin,
-    // Bound: will be traced by esdoctor for analysis
-    esdoctor.bind(traceablePlugin1),
-    esdoctor.bind(traceablePlugin2),
-    esdoctor.bind(traceablePlugin3),
-    // Unbound: will not be traced (plain plugin)
-    otherPlugin,
-  ],
+  plugins: esdoctor.setup([plugin1, plugin2, plugin3], options),
   // Should enable `metafile` option to get the analysis result
   metafile: true,
 });
@@ -39,17 +28,17 @@ esbuild.build({
 
 ## API
 
-### create
+### setup
 
-Create a plugin context.
+Setup the esdoctor plugin.
 
 ```ts
 // Signature
 
-function create(options?: PluginOptions): {
-  plugin: esbuild.Plugin;
-  bind: (plugin: esbuild.Plugin) => esbuild.Plugin;
-};
+function setup(
+  plugins: esbuild.Plugin[],
+  options?: PluginOptions,
+): esbuild.Plugin[];
 
 interface PluginOptions {
   enabled?: boolean;
@@ -60,9 +49,3 @@ interface PluginOptions {
 
 - `options`: The options for the plugin.
   - `enabled`: Enable the esdoctor plugin. (default: `true`)
-
-**Returns:**
-
-- `{ plugin: esbuild.Plugin, bind: (plugin: esbuild.Plugin) => esbuild.Plugin }`: The plugin context.
-  - `plugin`: The base plugin of esdoctor.
-  - `bind(plugin)`: Returns an enhanced plugin so that it can be traced by esdoctor for analysis.
