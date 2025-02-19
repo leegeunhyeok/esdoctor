@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/dialog';
 import { bytesToText } from '@/src/utils/filesize';
 import type { ModuleTreeItem } from '@/src/utils/resolve-module-tree';
-import { CornerDownRight, CornerLeftDown } from 'lucide-react';
+import { CornerLeftDown, File } from 'lucide-react';
 
 export interface ModuleReferenceTreeModalProps {
   open: boolean;
@@ -72,8 +72,9 @@ export function ModuleReferenceTreeModal({
               {nonTreeShakable.map(renderModuleItem)}
             </div>
           ) : null}
-          <div className="bg-muted flex flex-col gap-2 rounded-md p-2">
+          <div className="flex flex-col gap-2 rounded-md border p-2">
             <div className="flex flex-row items-center gap-2">
+              <File size={16} />
               {module.path}
             </div>
             <div className="flex flex-col">
