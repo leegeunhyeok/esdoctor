@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "lint": "oxlint",
-    "prepare": "yarn workspace example build:esdoctor && yarn workspace example exec cp esdoctor.json ../packages/frontend/src/esdoctor.json",
+    "prepare": "yarn workspace example build:esdoctor && yarn workspace example exec cp esdoctor.json ../packages/template/esdoctor.json",
     "build": "nx run-many -t build"
   },
   "devDependencies": {

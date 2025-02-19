@@ -12,8 +12,8 @@ import { bytesToText } from '@/src/utils/filesize';
 import { formatInteger, formatNumberWithDecimal } from '@/src/utils/format';
 import { ChevronRight, HardDrive } from 'lucide-react';
 
-const metafile = window.$$dataSource.metafile;
-const modules = window.$$dataSource.moduleStatus;
+const metafile = window.__esdoctorDataSource.metafile;
+const modules = window.__esdoctorDataSource.moduleStatus;
 const outputs = Object.entries(metafile.outputs).map(([path, output]) => ({
   bytes: output.bytes,
   filename: path.split('/').pop(),

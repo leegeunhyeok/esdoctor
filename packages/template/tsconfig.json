@@ -6,7 +6,7 @@
     "moduleResolution": "bundler",
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "types": ["./src/types.d.ts"],
+    "types": ["./src/types.d.ts", "node"],
     "esModuleInterop": true,
     "strictNullChecks": true,
     "allowJs": false,

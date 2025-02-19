@@ -11,7 +11,7 @@ import { formatNumberWithDecimal } from '@/src/utils/format';
 import { millisecondsToText } from '@/src/utils/time';
 import { ChevronRight, Timer } from 'lucide-react';
 
-const { total: totalDuration, hooks } = window.$$dataSource.duration;
+const { total: totalDuration, hooks } = window.__esdoctorDataSource.duration;
 const { onStart, onResolve, onLoad, onEnd } = hooks;
 const totalHookDuration = onStart + onResolve + onLoad + onEnd;
 const hookDurations = [

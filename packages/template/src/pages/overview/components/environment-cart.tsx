@@ -8,7 +8,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Box, Cpu, DraftingCompass, Folder } from 'lucide-react';
 
-const environment = window.$$dataSource.environment;
+const environment = window.__esdoctorDataSource.environment;
 
 export function EnvironmentCart() {
   return (

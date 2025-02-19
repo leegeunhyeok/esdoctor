@@ -7,7 +7,7 @@
   "categories": {
     "correctness": "warn"
   },
-  "ignorePatterns": ["**/dist", "packages/frontend/src/components/**"],
+  "ignorePatterns": ["**/dist", "packages/template/src/components/**"],
   "rules": {
     "eqeqeq": "off",
     "import/no-cycle": "error",
