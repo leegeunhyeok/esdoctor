@@ -1,4 +1,4 @@
-import type { Plugin } from 'esbuild';
+import type { Plugin, PluginBuild } from 'esbuild';
 import { PluginState } from './state.js';
 
 export interface PluginOptions {
@@ -9,26 +9,52 @@ const DEFAULT_OPTIONS: PluginOptions = {
   enabled: true,
 };
 
-export function create(options: PluginOptions = DEFAULT_OPTIONS): {
-  plugin: Plugin;
+export function setup(
+  plugins: Plugin[],
+  options: PluginOptions = DEFAULT_OPTIONS,
+) {
+  if (!options?.enabled) {
+    return plugins;
+  }
+
+  const context = create(options);
+
+  return [
+    context.startMarker,
+    ...plugins.map((plugin) => context.trace(plugin)),
+    context.endMarker,
+  ];
+}
+
+function create(_options: PluginOptions): {
+  startMarker: Plugin;
+  endMarker: Plugin;
   trace: (plugin: Plugin) => Plugin;
 } {
   const state = new PluginState();
-  const plugin: Plugin = {
-    name: 'esdoctor-plugin',
-    setup(build) {
-      if (!options.enabled) {
-        return;
-      }
 
-      if (build.initialOptions?.metafile !== true) {
-        throw new Error('enable `metafile` option to use the plugin');
-      }
+  function assertMetafileOption(build: PluginBuild) {
+    if (build.initialOptions?.metafile !== true) {
+      throw new Error('enable `metafile` option to use the plugin');
+    }
+  }
+
+  const startMarker: Plugin = {
+    name: 'esdoctor-plugin:start-marker',
+    setup(build) {
+      assertMetafileOption(build);
 
       build.onStart(() => {
         state.reset();
         state.start(build.initialOptions);
       });
+    },
+  };
+
+  const endMarker: Plugin = {
+    name: 'esdoctor-plugin:end-marker',
+    setup(build) {
+      assertMetafileOption(build);
 
       build.onEnd((result) => {
         state.end();
@@ -38,16 +64,13 @@ export function create(options: PluginOptions = DEFAULT_OPTIONS): {
   };
 
   return {
-    plugin,
-    trace: options.enabled ? withTraceImpl.bind(state) : withTraceShim,
+    startMarker,
+    endMarker,
+    trace: withTrace.bind(state),
   };
 }
 
-function withTraceShim(plugin: Plugin): Plugin {
-  return plugin;
-}
-
-function withTraceImpl(this: PluginState, plugin: Plugin): Plugin {
+function withTrace(this: PluginState, plugin: Plugin): Plugin {
   const name = plugin.name;
   const setup: Plugin['setup'] = (build) => {
     return plugin.setup?.({

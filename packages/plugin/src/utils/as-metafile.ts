@@ -1,5 +1,5 @@
+import { BuildResult } from 'esbuild';
 import * as esdoctor from '@esdoctor/types';
-import { BuildResult } from '../types.js';
 
 export function asMetafile(result: BuildResult): esdoctor.Metafile | null {
   const {
@@ -10,7 +10,7 @@ export function asMetafile(result: BuildResult): esdoctor.Metafile | null {
     metafile,
     moduleStatus,
     traceList,
-  } = result;
+  } = (result ?? {}) as unknown as esdoctor.Metafile;
 
   if (
     alerts &&
