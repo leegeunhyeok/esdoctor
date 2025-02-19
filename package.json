@@ -11,6 +11,10 @@
     "build": "nx run-many -t build"
   },
   "devDependencies": {
+    "@nx/js": "20.4.0",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
     "@types/node": "^22",
     "@yarnpkg/types": "^4.0.0",
     "knip": "^5.44.4",

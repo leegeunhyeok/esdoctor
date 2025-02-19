@@ -1,4 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/nrwl/nx/refs/tags/20.4.0/packages/nx/schemas/project-schema.json",
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "release": {
+    "projects": ["packages/*"],
+    "releaseTagPattern": "v{version}",
+    "git": {
+      "commit": true,
+      "tag": true,
+      "commitMessage": "chore(release): {version}"
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github",
+        "file": false
+      }
+    }
+  }
 }
