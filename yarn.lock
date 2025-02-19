@@ -671,7 +671,6 @@ __metadata:
     echarts: "npm:^5.6.0"
     es-toolkit: "npm:^1.32.0"
     esbuild: "npm:^0.24.2"
-    knip: "npm:^5.44.4"
     lucide-react: "npm:^0.474.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
