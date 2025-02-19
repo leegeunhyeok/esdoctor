@@ -1,5 +1,4 @@
-import { AlertCircle, Timer } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Timer } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -30,22 +29,32 @@ export function TimelineDetailModal({
 
   function renderCode(code: string, language: string) {
     if (code.length > CODE_MAX_LENGTH) {
-      console.log(code);
+      console.warn('Code is too long to highlight');
 
       return (
-        <>
-          <Code
-            code={`// Data is too long to display.`}
-            language="javascript"
-          />
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              The data is too long to display. Show console instead.
-            </AlertDescription>
-          </Alert>
-        </>
+        <pre
+          className="block text-xs"
+          style={{
+            background: 'rgb(250, 250, 250)',
+            color: 'rgb(56, 58, 66)',
+            fontFamily:
+              '"Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace',
+            direction: 'ltr',
+            textAlign: 'left',
+            whiteSpace: 'pre',
+            wordSpacing: 'normal',
+            wordBreak: 'normal',
+            lineHeight: '1.5',
+            tabSize: '2',
+            hyphens: 'none',
+            padding: '1em',
+            margin: '0px',
+            overflow: 'auto visible',
+            borderRadius: '0.3em',
+          }}
+        >
+          {code}
+        </pre>
       );
     }
 
