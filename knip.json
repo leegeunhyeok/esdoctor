@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": ["packages/frontend/components/**", "example/**"],
+  "ignore": ["packages/template/components/**", "example/**"],
   "ignoreExportsUsedInFile": {
     "interface": true,
     "type": true

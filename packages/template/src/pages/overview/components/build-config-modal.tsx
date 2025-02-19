@@ -9,7 +9,11 @@ import {
 import { Label } from '@/components/ui/label';
 import { Code } from '@/src/components/code';
 
-const buildConfig = JSON.stringify(window.$$dataSource.buildOptions, null, 2);
+const buildConfig = JSON.stringify(
+  window.__esdoctorDataSource.buildOptions,
+  null,
+  2,
+);
 
 export function BuildConfigModal() {
   return (

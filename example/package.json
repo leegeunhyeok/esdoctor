@@ -6,7 +6,8 @@
   "scripts": {
     "dev:web": "vite",
     "build:web": "tsc -b && vite build",
-    "build:esdoctor": "node index.mjs",
+    "build:esdoctor": "node build.mjs",
+    "generate": "node generate.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,7 +16,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@esdoctor/plugin": "workspace:*",
+    "@esdoctor/plugin": "workspace:^",
+    "@esdoctor/template": "workspace:^",
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

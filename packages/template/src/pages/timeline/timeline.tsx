@@ -6,7 +6,7 @@ import { createTimelineData } from './helpers/create-timeline-data';
 import { downsampleTimelineData } from './helpers/downsample-timeline-data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const data = createTimelineData(window.$$dataSource.traceList);
+const data = createTimelineData(window.__esdoctorDataSource.traceList);
 const downsampledData = downsampleTimelineData(data.timelineData);
 
 export function Timeline() {

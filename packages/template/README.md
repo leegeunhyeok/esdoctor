@@ -1,4 +1,4 @@
-# @esdoctor/frontend
+# @esdoctor/template
 
 ## Setup
 

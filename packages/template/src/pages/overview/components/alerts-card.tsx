@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { useMemo, useState } from 'react';
 
 const alerts = [
-  ...window.$$dataSource.alerts,
+  ...window.__esdoctorDataSource.alerts,
   ...generatedWarnings.map((message) => ({
     type: 'warning',
     text: message,

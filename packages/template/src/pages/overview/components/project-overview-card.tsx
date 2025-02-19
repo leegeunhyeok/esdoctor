@@ -5,8 +5,10 @@ import { Blocks, CircleX, TriangleAlert } from 'lucide-react';
 import { BuildConfigModal } from './build-config-modal';
 import { generatedWarnings } from '@/src/utils/generate-warnings';
 
-const moduleCount = Object.keys(window.$$dataSource.metafile.inputs).length;
-const messageCount = window.$$dataSource.alerts.reduce(
+const moduleCount = Object.keys(
+  window.__esdoctorDataSource.metafile.inputs,
+).length;
+const messageCount = window.__esdoctorDataSource.alerts.reduce(
   (prev, { type }) =>
     type === 'error'
       ? { ...prev, errors: prev.errors + 1 }

@@ -18,7 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TreemapChart } from './components/treemap-chart';
 import { SunburstChart } from './components/sunburst-chart';
 
-const metafile = window.$$dataSource.metafile;
+const metafile = window.__esdoctorDataSource.metafile;
 
 export function Analyze() {
   const [selectedView, setSelectedView] = useState('treemap');

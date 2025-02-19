@@ -1,9 +1,11 @@
-import { dirname, resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import RefreshPlugin from '@rspack/plugin-react-refresh';
+import { BUNDLE_NAME, HTML_TEMPLATE, OUTPUT_DIR } from './shared.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.env.NODE_ENV === 'development';
@@ -16,6 +18,12 @@ export default defineConfig({
   entry: {
     main: './src/main.tsx',
   },
+  output: {
+    clean: true,
+    filename: BUNDLE_NAME,
+    path: join(__dirname, OUTPUT_DIR),
+  },
+  devtool: isDev ? 'source-map' : false,
   devServer: {
     port: 8080,
     hot: true,
@@ -64,7 +72,15 @@ export default defineConfig({
   },
   plugins: [
     new rspack.HtmlRspackPlugin({
-      template: './index.html',
+      template: HTML_TEMPLATE,
+      scriptLoading: 'blocking',
+      inject: 'body',
+      minify: !isDev,
+    }),
+    new rspack.DefinePlugin({
+      'process.env.METAFILE': JSON.stringify(
+        isDev ? await loadMetafile() : null,
+      ),
     }),
     isDev ? new RefreshPlugin() : null,
     process.env.RSDOCTOR ? new RsdoctorRspackPlugin() : null,
@@ -81,3 +97,16 @@ export default defineConfig({
     css: true,
   },
 });
+
+function loadMetafile() {
+  return readFile('./esdoctor.json', 'utf-8').catch((error) => {
+    if (error.code === 'ENOENT') {
+      console.error('Metafile is not found');
+      console.error(
+        'Please run `yarn workspace esdoctor run prepare` to generate the metafile',
+      );
+      process.exit(1);
+    }
+    throw error;
+  });
+}

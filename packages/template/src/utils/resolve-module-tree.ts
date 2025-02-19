@@ -1,5 +1,6 @@
 import type * as esbuild from 'esbuild';
-const metafile = window.$$dataSource.metafile;
+
+const metafile = window.__esdoctorDataSource.metafile;
 
 export interface ModuleTreeItem {
   path: string;

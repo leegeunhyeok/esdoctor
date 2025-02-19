@@ -1,10 +1,26 @@
 {
-  "name": "@esdoctor/frontend",
+  "name": "@esdoctor/template",
   "version": "0.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development concurrently \"rspack serve\" \"yarn watch:css\"",
     "doctor": "cross-env NODE_ENV=production RSDOCTOR=true rspack build",
-    "build": "cross-env NODE_ENV=production rspack build",
+    "build:web": "cross-env NODE_ENV=production rspack build && yarn build:css",
+    "build": "yarn build:web && tsup",
     "watch:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css --watch",
     "build:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css"
   },
@@ -51,8 +67,10 @@
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "esbuild": "^0.24.2",
+    "linkedom": "^0.18.9",
     "react-refresh": "^0.14.0",
     "tailwindcss": "^4.0.4",
+    "tsup": "^8.3.6",
     "typescript": "^5.7.3"
   }
 }
