@@ -6,7 +6,11 @@
   "bin": {
     "esdoctor": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepack": "yarn build",
     "dev": "tsx src/index.ts",
     "build": "tsup"
   },

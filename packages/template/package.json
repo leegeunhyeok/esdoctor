@@ -17,7 +17,11 @@
       }
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepack": "yarn build",
     "dev": "cross-env NODE_ENV=development concurrently \"rspack serve\" \"yarn watch:css\"",
     "doctor": "cross-env NODE_ENV=production RSDOCTOR=true rspack build",
     "build:web": "cross-env NODE_ENV=production rspack build && yarn build:css",

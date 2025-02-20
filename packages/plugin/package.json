@@ -5,14 +5,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "build": "tsup"
   },
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "@esdoctor/types": "workspace:*"
   },
