@@ -49,3 +49,7 @@ interface PluginOptions {
 
 - `options`: The options for the plugin.
   - `enabled`: Enable the esdoctor plugin. (default: `true`)
+
+## License
+
+[MIT](./LICENSE)
