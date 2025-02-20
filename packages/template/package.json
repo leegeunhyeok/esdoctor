@@ -1,6 +1,6 @@
 {
   "name": "@esdoctor/template",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -58,7 +58,7 @@
     "traverse": "^0.6.11"
   },
   "devDependencies": {
-    "@esdoctor/types": "workspace:*",
+    "@esdoctor/types": "0.1.0-alpha.1",
     "@rsdoctor/rspack-plugin": "^0.4.13",
     "@rspack/cli": "^1.2.2",
     "@rspack/core": "^1.2.2",
