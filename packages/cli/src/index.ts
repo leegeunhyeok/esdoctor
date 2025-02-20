@@ -59,12 +59,12 @@ try {
   const reportPath = resolve(cwd, reportName);
   await writeFile(reportPath, template, 'utf-8');
 
-  console.log(`Report generated: ${colors.blue(reportPath)}`);
+  console.log(`\nReport generated: ${colors.blue(reportPath)}`);
 } catch (error) {
-  console.error(
+  const message =
     process.env.DEBUG === '1'
       ? error
-      : colors.red(error.message ?? 'unknown error'),
-  );
+      : colors.red(error.message ?? 'unexpected error');
+  console.error(`\n${message}`);
   process.exit(1);
 }
