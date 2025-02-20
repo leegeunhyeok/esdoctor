@@ -42,6 +42,7 @@ function setup(
 
 interface PluginOptions {
   enabled?: boolean;
+  collectHooksData?: boolean;
 }
 ```
 
@@ -49,6 +50,7 @@ interface PluginOptions {
 
 - `options`: The options for the plugin.
   - `enabled`: Enable the esdoctor plugin. (default: `true`)
+  - `collectHooksData`: Whether to collect data(args, contents, etc.) from the esbuild plugin hooks. (default: `true`)
 
 ## License
 

@@ -2,11 +2,23 @@ import type { Plugin, PluginBuild } from 'esbuild';
 import { PluginState } from './state.js';
 
 export interface PluginOptions {
+  /**
+   * Whether to enable the plugin.
+   *
+   * @default true
+   */
   enabled?: boolean;
+  /**
+   * Whether to collect data(args, contents, etc.) from the esbuild plugin hooks.
+   *
+   * @default true
+   */
+  collectHooksData?: boolean;
 }
 
 const DEFAULT_OPTIONS: PluginOptions = {
   enabled: true,
+  collectHooksData: true,
 };
 
 export function setup(
@@ -26,12 +38,14 @@ export function setup(
   ];
 }
 
-function create(_options: PluginOptions): {
+function create(options: PluginOptions): {
   startMarker: Plugin;
   endMarker: Plugin;
   trace: (plugin: Plugin) => Plugin;
 } {
-  const state = new PluginState();
+  const state = new PluginState({
+    collectHooksData: options.collectHooksData ?? true,
+  });
 
   function assertMetafileOption(build: PluginBuild) {
     if (build.initialOptions?.metafile !== true) {

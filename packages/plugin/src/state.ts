@@ -10,6 +10,10 @@ import type { BuildOptions, BuildResult } from 'esbuild';
 import { getEnvironment } from './get-environment.js';
 import { toNormalizedObject } from './utils/to-normalized-object.js';
 
+interface PluginStateOptions {
+  collectHooksData: boolean;
+}
+
 export class PluginState {
   static extend(state: PluginState, result: BuildResult) {
     if (result.metafile == null) {
@@ -82,7 +86,7 @@ export class PluginState {
   endedAt = 0;
   traceList: HookTrace[] = [];
 
-  constructor() {
+  constructor(private options: PluginStateOptions) {
     this.environment = getEnvironment();
   }
 
@@ -131,13 +135,16 @@ export class PluginState {
         this.traceList.push({
           type: config.type,
           name: config.name,
-          data: config.data,
-          code: (hookedResult as unknown as { contents?: string })?.contents,
           duration: {
             total: end - start,
             start,
             end,
           },
+          // Collect data only if the option is enabled
+          data: this.options.collectHooksData ? config.data : undefined,
+          code: this.options.collectHooksData
+            ? (hookedResult as unknown as { contents?: string })?.contents
+            : undefined,
         });
       }
     };
