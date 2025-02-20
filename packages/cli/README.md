@@ -4,7 +4,7 @@
 
 ```bash
 # Generate a report with a default name (report.html)
-npx esdoctor <metafile>
+npx @esdoctor/cli <metafile>
 ```
 
 Options:

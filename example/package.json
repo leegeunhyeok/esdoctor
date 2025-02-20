@@ -16,8 +16,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@esdoctor/plugin": "workspace:^",
-    "@esdoctor/template": "workspace:^",
+    "@esdoctor/plugin": "0.1.0-alpha.0",
+    "@esdoctor/template": "0.1.0-alpha.0",
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

@@ -1657,7 +1657,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@esdoctor/plugin@workspace:^, @esdoctor/plugin@workspace:packages/plugin":
+"@esdoctor/plugin@npm:0.1.0-alpha.0, @esdoctor/plugin@workspace:packages/plugin":
   version: 0.0.0-use.local
   resolution: "@esdoctor/plugin@workspace:packages/plugin"
   dependencies:
@@ -1670,7 +1670,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@esdoctor/template@workspace:*, @esdoctor/template@workspace:^, @esdoctor/template@workspace:packages/template":
+"@esdoctor/template@npm:0.1.0-alpha.0, @esdoctor/template@workspace:*, @esdoctor/template@workspace:packages/template":
   version: 0.0.0-use.local
   resolution: "@esdoctor/template@workspace:packages/template"
   dependencies:
@@ -7265,8 +7265,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example@workspace:example"
   dependencies:
-    "@esdoctor/plugin": "workspace:^"
-    "@esdoctor/template": "workspace:^"
+    "@esdoctor/plugin": "npm:0.1.0-alpha.0"
+    "@esdoctor/template": "npm:0.1.0-alpha.0"
     "@eslint/js": "npm:^9.13.0"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.3.1"
