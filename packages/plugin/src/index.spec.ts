@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild';
 import { describe, it, expect } from 'vitest';
-import { asMetafile, BuildResult, setup } from './index.js';
+import { asMetafile, setup } from './index.js';
 import assert from 'node:assert';
 
 const TEMPLATE = {

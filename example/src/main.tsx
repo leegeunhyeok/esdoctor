@@ -10,4 +10,5 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
+// eslint-disable-next-line no-default-export
 export default App;
