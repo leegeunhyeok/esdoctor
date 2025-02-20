@@ -1,6 +1,7 @@
 {
   "name": "@esdoctor/template",
   "version": "0.0.0",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -22,7 +23,7 @@
     "build:web": "cross-env NODE_ENV=production rspack build && yarn build:css",
     "build": "yarn build:web && tsup",
     "watch:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css --watch",
-    "build:css": "tailwindcss -i ./src/styles/global.css -o ./dist/global.css"
+    "build:css": "tailwindcss -m -i ./src/styles/global.css -o ./dist/global.css"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.4",
