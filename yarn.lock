@@ -1643,8 +1643,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@esdoctor/cli@workspace:packages/cli"
   dependencies:
-    "@esdoctor/template": "workspace:*"
-    "@esdoctor/types": "workspace:^"
+    "@esdoctor/template": "npm:0.1.0-alpha.0"
+    "@esdoctor/types": "npm:0.1.0-alpha.0"
     "@types/node": "npm:^22"
     "@types/yargs": "npm:^17.0.33"
     picocolors: "npm:^1.1.1"
@@ -1653,7 +1653,7 @@ __metadata:
     typescript: "npm:^5.7.3"
     yargs: "npm:^17.7.2"
   bin:
-    esdoctor: ./dist/index.mjs
+    esdoctor: ./dist/index.js
   languageName: unknown
   linkType: soft
 
@@ -1661,7 +1661,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@esdoctor/plugin@workspace:packages/plugin"
   dependencies:
-    "@esdoctor/types": "workspace:*"
+    "@esdoctor/types": "npm:0.1.0-alpha.0"
     "@types/node": "npm:^22"
     esbuild: "npm:^0.24.2"
     tsup: "npm:^8.3.6"
@@ -1670,11 +1670,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@esdoctor/template@workspace:*, @esdoctor/template@workspace:^, @esdoctor/template@workspace:packages/template":
+"@esdoctor/template@npm:0.1.0-alpha.0, @esdoctor/template@workspace:^, @esdoctor/template@workspace:packages/template":
   version: 0.0.0-use.local
   resolution: "@esdoctor/template@workspace:packages/template"
   dependencies:
-    "@esdoctor/types": "workspace:*"
+    "@esdoctor/types": "npm:0.1.0-alpha.0"
     "@radix-ui/react-checkbox": "npm:^1.1.4"
     "@radix-ui/react-dialog": "npm:^1.1.6"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.6"
@@ -1722,7 +1722,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@esdoctor/types@workspace:*, @esdoctor/types@workspace:^, @esdoctor/types@workspace:packages/types":
+"@esdoctor/types@npm:0.1.0-alpha.0, @esdoctor/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@esdoctor/types@workspace:packages/types"
   dependencies:
