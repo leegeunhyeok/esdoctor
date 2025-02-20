@@ -9,6 +9,16 @@
 > [!NOTE]  
 > Release coming soon.
 
+# Features
+
+- 🔥 Summary of project & build results
+- 🔎 Trace each plugin hook performance
+- ⭐️ Awesome visualization of collected data
+  - 🌳 Treemap & Sunburst chart for bundles
+  - 📈 Timeline chart for traces
+- 🌍 Generate static HTML reports
+- 🐤 Easy to use
+
 ## Preview
 
 ![preview-1](./images/preview-1.png)
