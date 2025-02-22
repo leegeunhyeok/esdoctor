@@ -1,6 +1,7 @@
 import traverse from 'traverse';
 import { merge } from 'es-toolkit';
 import type * as esbuild from 'esbuild';
+import { ANIMATION_DURATION } from '@/src/constants';
 
 export interface ToChartDataOptions {
   includeFilter?: string;
@@ -123,86 +124,86 @@ export function getTreemapSeries(
   data: ChartData,
   additionalOptions: echarts.TreemapSeriesOption = {},
 ): echarts.TreemapSeriesOption {
-  return merge(
-    {
-      type: 'treemap',
-      name: data.name,
-      data: data.children,
-      width: '100%',
-      height: '100%',
-      label: {
-        show: true,
-      },
-      upperLabel: {
-        show: true,
-        height: 20,
-        position: 'insideTop',
-        fontSize: 12,
-        distance: 10,
-        color: '#fff',
-        formatter: (params) => {
-          return params.name.split('/').pop() ?? '';
-        },
-      },
-      breadcrumb: {
-        show: true,
-        bottom: 50,
-      },
-      itemStyle: {
-        color: '#555',
-        gapWidth: 1,
-        borderColorSaturation: 0.4,
-        colorSaturation: 0.5,
-      },
-      emphasis: {
-        upperLabel: {
-          position: 'insideTop',
-        },
-      },
-      colorBy: 'series',
-      roam: false,
-      levels: [
-        {
-          color: [
-            '#3b82f6',
-            '#eab308',
-            '#f43f5e',
-            '#22c55e',
-            '#8b5cf6',
-            '#f97316',
-            '#2dd4bf',
-          ],
-          itemStyle: {
-            gapWidth: 1,
-            borderColor: '#555',
-          },
-        },
-      ],
+  const baseOptions: echarts.TreemapSeriesOption = {
+    type: 'treemap',
+    name: data.name,
+    data: data.children,
+    width: '100%',
+    height: '100%',
+    label: {
+      show: true,
     },
-    additionalOptions,
-  );
+    upperLabel: {
+      show: true,
+      height: 20,
+      position: 'insideTop',
+      fontSize: 12,
+      distance: 10,
+      color: '#fff',
+      formatter: (params) => {
+        return params.name.split('/').pop() ?? '';
+      },
+    },
+    breadcrumb: {
+      show: true,
+      bottom: 50,
+    },
+    itemStyle: {
+      color: '#555',
+      gapWidth: 1,
+      borderColorSaturation: 0.4,
+      colorSaturation: 0.5,
+    },
+    emphasis: {
+      upperLabel: {
+        position: 'insideTop',
+      },
+    },
+    animationDuration: ANIMATION_DURATION,
+    colorBy: 'series',
+    roam: false,
+    levels: [
+      {
+        color: [
+          '#3b82f6',
+          '#eab308',
+          '#f43f5e',
+          '#22c55e',
+          '#8b5cf6',
+          '#f97316',
+          '#2dd4bf',
+        ],
+        itemStyle: {
+          gapWidth: 1,
+          borderColor: '#555',
+        },
+      },
+    ],
+  };
+
+  return merge(baseOptions, additionalOptions);
 }
 
 export const getSunburstSeries = (
   data: ChartData,
   additionalOptions: echarts.SunburstSeriesOption = {},
 ): echarts.SunburstSeriesOption => {
-  return merge(
-    {
-      type: 'sunburst',
-      radius: ['5%', '90%'],
-      nodeClick: 'rootToNode',
-      animationDurationUpdate: 500,
-      data: data.children,
-      universalTransition: true,
-      itemStyle: {
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,.5)',
-      },
-      label: {
-        show: false,
-      },
+  const baseOptions: echarts.SunburstSeriesOption = {
+    type: 'sunburst',
+    radius: ['5%', '90%'],
+    nodeClick: 'rootToNode',
+    data: data.children,
+    universalTransition: true,
+    animationDuration: ANIMATION_DURATION,
+    animationDurationUpdate: ANIMATION_DURATION,
+    itemStyle: {
+      borderWidth: 1,
+      borderColor: 'rgba(255,255,255,.5)',
     },
-    additionalOptions,
-  );
+    label: {
+      show: false,
+    },
+  };
+
+  return merge(baseOptions, additionalOptions);
 };

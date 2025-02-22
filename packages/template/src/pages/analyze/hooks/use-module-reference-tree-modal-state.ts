@@ -4,6 +4,7 @@ import {
   resolveModuleTree,
   type ModuleTreeItem,
 } from '@/src/utils/resolve-module-tree';
+import { ANIMATION_DURATION } from '@/src/constants';
 
 export interface ModuleItem {
   module: {
@@ -22,6 +23,8 @@ export const EMPTY_MODULE: ModuleItem['module'] = {
 
 export function useModuleReferenceTreeModalState() {
   const chartRef = useRef<ChartRef>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const prevDataIndexRef = useRef<number | null>(null);
   const [moduleItem, setModuleItem] = useState<ModuleItem | null>(null);
 
   useEffect(() => {
@@ -33,6 +36,7 @@ export function useModuleReferenceTreeModalState() {
 
     const handleClick = (event: echarts.ECElementEvent) => {
       if (event.componentType === 'series' && event.data) {
+        timerRef.current && clearTimeout(timerRef.current);
         const {
           path: modulePath,
           size: originSize,
@@ -48,14 +52,22 @@ export function useModuleReferenceTreeModalState() {
           return;
         }
 
-        setModuleItem({
-          module: {
-            path: modulePath,
-            originSize,
-            bundledSize,
-          },
-          referenceStack: resolveModuleTree(modulePath),
-        });
+        const modalOpenDelay =
+          prevDataIndexRef.current === event.dataIndex
+            ? 0
+            : ANIMATION_DURATION + 250;
+
+        prevDataIndexRef.current = event.dataIndex;
+        timerRef.current = setTimeout(() => {
+          setModuleItem({
+            module: {
+              path: modulePath,
+              originSize,
+              bundledSize,
+            },
+            referenceStack: resolveModuleTree(modulePath),
+          });
+        }, modalOpenDelay);
       }
     };
 
