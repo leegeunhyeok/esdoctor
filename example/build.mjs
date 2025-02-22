@@ -1,18 +1,34 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import * as esbuild from 'esbuild';
 import { setup, asMetafile } from '@esdoctor/plugin';
+import * as swc from '@swc/core';
+import * as svgr from '@svgr/core';
+import path from 'node:path';
 
 const result = await esbuild.build({
   entryPoints: ['./src/main.tsx'],
   bundle: true,
   metafile: true,
   outdir: 'dist',
-  loader: {
-    '.svg': 'text',
-  },
+  tsconfig: './tsconfig.app.json',
   plugins: setup([
     {
-      name: 'example-plugin',
+      name: 'example-status-plugin',
+      setup(build) {
+        build.onStart(() => console.log('Build start'));
+        // build.onResolve({ filter: /.*/ }, (args) => {
+        //   console.log('Lookup module:', args.importer, '->', args.path);
+        //   return null;
+        // });
+        build.onLoad({ filter: /.*/ }, (args) => {
+          console.log('Module loaded:', args.path);
+          return null;
+        });
+        build.onEnd(() => console.log('Build end'));
+      },
+    },
+    {
+      name: 'example-transform-plugin',
       setup(build) {
         function delay(ms) {
           return new Promise((resolve) => {
@@ -20,33 +36,63 @@ const result = await esbuild.build({
           });
         }
 
-        build.onStart(() => delay(1));
-
-        build.onResolve({ filter: /\.(?:[mc]js|[tj]sx?)$/ }, async (args) => {
-          if (args.pluginData?.resolving) {
-            return;
-          }
-
-          const result = await build.resolve(args.path, {
-            importer: args.importer,
-            kind: args.kind,
-            resolveDir: args.resolveDir,
-            with: args.with,
-            pluginData: {
-              resolving: true,
-            },
-          });
-
-          return result;
-        });
+        build.onStart(() => delay(50));
 
         build.onLoad({ filter: /\.(?:[mc]js|[tj]sx?)$/ }, async (args) => {
-          const data = await readFile(args.path, { encoding: 'utf-8' });
+          const rawCode = await readFile(args.path, { encoding: 'utf-8' });
+          const basename = path.basename(args.path);
+          const extname = path.extname(args.path);
 
-          return { contents: data, loader: args.path.split('.').pop() };
+          const parserConfig = (() => {
+            switch (extname) {
+              case '.ts':
+              case '.mts':
+              case '.tsx':
+                return { syntax: 'typescript', tsx: true };
+
+              case '.js':
+              case '.mjs':
+              case '.cjs':
+              case '.jsx':
+                return { syntax: 'ecmascript', jsx: true };
+
+              default:
+                throw new Error(`Unsupported file extension: ${extname}`);
+            }
+          })();
+
+          const result = await swc.transform(rawCode, {
+            filename: basename,
+            jsc: {
+              parser: parserConfig,
+              target: 'es5',
+              transform: {
+                react: {
+                  runtime: 'automatic',
+                },
+              },
+            },
+            module: {
+              type: 'es6',
+            },
+            isModule: true,
+          });
+
+          return { contents: result.code, loader: 'js' };
         });
 
-        build.onEnd(() => delay(1));
+        build.onEnd(() => delay(50));
+      },
+    },
+    {
+      name: 'example-svg-transform-plugin',
+      setup(build) {
+        build.onLoad({ filter: /\.svg$/ }, async (args) => {
+          const rawSvg = await readFile(args.path, { encoding: 'utf-8' });
+          const code = await svgr.transform(rawSvg, { namedExport: 'default' });
+
+          return { contents: code, loader: 'jsx' };
+        });
       },
     },
   ]),
