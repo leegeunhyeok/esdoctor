@@ -27,7 +27,7 @@ export function ProjectOverviewCart() {
       <CardContent>
         <div className="flex h-[80px] flex-row gap-4 pt-6">
           <div className="flex flex-1 flex-row items-center gap-4">
-            <div className="flex h-10 w-10 items-center rounded-full bg-red-100 p-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100">
               <CircleX className="text-red-500" />
             </div>
             <div className="flex flex-col">
@@ -39,7 +39,7 @@ export function ProjectOverviewCart() {
           </div>
           <Separator orientation="vertical" className="-mt-6 h-[105px]" />
           <div className="flex flex-1 flex-row items-center gap-4">
-            <div className="flex h-10 w-10 items-center rounded-full bg-yellow-100 p-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-100">
               <TriangleAlert className="text-yellow-500" />
             </div>
             <div className="flex flex-col">
@@ -51,7 +51,7 @@ export function ProjectOverviewCart() {
           </div>
           <Separator orientation="vertical" className="-mt-6 h-[105px]" />
           <div className="flex flex-1 flex-row items-center gap-4">
-            <div className="flex h-10 w-10 items-center rounded-full bg-blue-100 p-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
               <Blocks className="text-blue-500" />
             </div>
             <div className="flex flex-col">

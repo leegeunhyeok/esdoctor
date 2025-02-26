@@ -1,6 +1,6 @@
 import { Page } from '@/src/components/page';
 import { ProjectOverviewCart } from './components/project-overview-card';
-import { EnvironmentCart } from './components/environment-cart';
+import { EnvironmentCard } from './components/environment-card';
 import { AlertsCard } from './components/alerts-card';
 import { BundleOverviewCard } from './components/bundle-overview-card';
 import { DurationCard } from './components/duration-card';
@@ -12,7 +12,7 @@ export function Overview() {
       <Page.Content className="flex flex-col gap-4 lg:flex-row lg:items-start">
         <div className="flex flex-1 flex-col gap-4 lg:flex-2">
           <ProjectOverviewCart />
-          <EnvironmentCart />
+          <EnvironmentCard />
           <AlertsCard />
         </div>
         <div className="flex flex-1 flex-col gap-4">
