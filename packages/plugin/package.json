@@ -1,6 +1,6 @@
 {
   "name": "@esdoctor/plugin",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.3",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@esdoctor/types": "workspace:*"
+    "@esdoctor/types": "0.1.0-alpha.3"
   },
   "devDependencies": {
     "@types/node": "^22",

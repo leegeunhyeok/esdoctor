@@ -1,6 +1,6 @@
 {
   "name": "@esdoctor/cli",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.3",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -15,12 +15,12 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@esdoctor/template": "workspace:*",
+    "@esdoctor/template": "0.1.0-alpha.3",
     "picocolors": "^1.1.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@esdoctor/types": "workspace:*",
+    "@esdoctor/types": "0.1.0-alpha.3",
     "@types/node": "^22",
     "@types/yargs": "^17.0.33",
     "tsup": "^8.3.6",
