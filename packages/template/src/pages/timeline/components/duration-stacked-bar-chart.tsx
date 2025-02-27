@@ -1,6 +1,8 @@
+import React from 'react';
+import { groupBy } from 'es-toolkit';
 import { Chart } from '@/src/components/chart';
 import { formatNumberWithDecimal } from '@/src/utils/format';
-import { groupBy } from 'es-toolkit';
+import { millisecondsToText } from '@/src/utils/time';
 
 interface DurationStackedBarChartProps {
   data: {
@@ -15,49 +17,55 @@ interface DurationStackedBarChartProps {
   traceNames: string[];
 }
 
-export function DurationStackedBarChart({
-  data,
-}: DurationStackedBarChartProps) {
-  const { series, total } = getStackedBarChartSeries(data);
+export const DurationStackedBarChart = React.memo(
+  function DurationStackedBarChart({ data }: DurationStackedBarChartProps) {
+    const { series, total } = getStackedBarChartSeries(data);
 
-  return (
-    <Chart
-      className="h-[60vh]"
-      options={{
-        tooltip: {
-          trigger: 'item',
-          formatter: (params) => {
-            const { value, seriesName } = params;
+    return (
+      <Chart
+        className="min-h-[80px]"
+        options={{
+          tooltip: {
+            trigger: 'item',
+            formatter: (params) => {
+              const { value, seriesName } = params;
 
-            return [
-              `From: ${seriesName}`,
-              `Total duration: ${formatNumberWithDecimal(value)}ms (${formatNumberWithDecimal(
-                (value / total) * 100,
-              )}%)`,
-            ].join('<br>');
+              return [
+                `From: ${seriesName}`,
+                `Total duration: ${millisecondsToText(value)} (${formatNumberWithDecimal(
+                  (value / total) * 100,
+                )}%)`,
+              ].join('<br>');
+            },
+            borderColor: 'var(--border)',
           },
-          borderColor: 'var(--border)',
-        },
-        grid: {
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 60,
-          containLabel: true,
-        },
-        legend: {},
-        xAxis: {
-          type: 'value',
-        },
-        yAxis: {
-          type: 'category',
-          data: ['Duration'],
-        },
-      }}
-      series={series as unknown as echarts.SeriesOption[]}
-    />
-  );
-}
+          grid: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            height: 50,
+            containLabel: true,
+          },
+          legend: {
+            show: true,
+            align: 'left',
+            type: 'scroll',
+            bottom: 0,
+          },
+          xAxis: {
+            type: 'value',
+          },
+          yAxis: {
+            type: 'category',
+            data: ['Duration'],
+          },
+        }}
+        series={series as unknown as echarts.SeriesOption[]}
+      />
+    );
+  },
+);
 
 function getStackedBarChartSeries(data: DurationStackedBarChartProps['data']) {
   let total = 0;

@@ -6,6 +6,7 @@ import { createTimelineData } from './helpers/create-timeline-data';
 import { downsampleTimelineData } from './helpers/downsample-timeline-data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DurationStackedBarChart } from './components/duration-stacked-bar-chart';
+import { Separator } from '@/components/ui/separator';
 
 const data = createTimelineData(window.__esdoctorDataSource.traceList);
 const downsampledData = downsampleTimelineData(data.timelineData);
@@ -38,9 +39,20 @@ export function Timeline() {
           </TabsContent>
           <TabsContent
             value="visualization"
-            className="hidden data-[state=active]:block"
+            className="hidden flex-col gap-4 data-[state=active]:flex"
             forceMount
           >
+            <Card>
+              <CardHeader>
+                <CardTitle>Total duration</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <DurationStackedBarChart
+                  data={data.timelineData}
+                  traceNames={data.traceNames}
+                />
+              </CardContent>
+            </Card>
             <Card>
               <CardHeader>
                 <CardTitle>Timeline visualization</CardTitle>
@@ -52,10 +64,6 @@ export function Timeline() {
                   max={data.max}
                   traceNames={data.traceNames}
                   traceNameIndexMap={data.traceNameIndexMap}
-                />
-                <DurationStackedBarChart
-                  data={data.timelineData}
-                  traceNames={data.traceNames}
                 />
               </CardContent>
             </Card>
