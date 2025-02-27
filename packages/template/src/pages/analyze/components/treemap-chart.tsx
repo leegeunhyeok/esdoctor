@@ -22,7 +22,7 @@ export function TreemapChart({ data, options }: TreemapChartProps) {
       <Chart
         ref={chartRef}
         className="h-[70vh] bg-neutral-50"
-        series={series}
+        series={[series]}
         options={chartOptions}
       />
       <ModuleReferenceTreeModal

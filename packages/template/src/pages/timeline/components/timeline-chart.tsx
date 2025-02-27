@@ -78,34 +78,36 @@ export function TimelineChart({
           },
         ],
       }}
-      series={{
-        type: 'custom',
-        renderItem: (_params, api) => {
-          const startValue = api.value(0);
-          const endValue = api.value(1);
-          const label = api.value(2);
-          const categoryIndex = traceNameIndexMap[label];
-          const start = api.coord([startValue, categoryIndex]);
-          const end = api.coord([endValue, categoryIndex]);
-          const height = api.size?.([0, 1])[1] * 0.8;
+      series={[
+        {
+          type: 'custom',
+          renderItem: (_params, api) => {
+            const startValue = api.value(0);
+            const endValue = api.value(1);
+            const label = api.value(2);
+            const categoryIndex = traceNameIndexMap[label];
+            const start = api.coord([startValue, categoryIndex]);
+            const end = api.coord([endValue, categoryIndex]);
+            const height = api.size?.([0, 1])[1] * 0.8;
 
-          return {
-            type: 'rect',
-            shape: {
-              x: start[0],
-              y: start[1] - height / 2,
-              width: Math.max(end[0] - start[0], 3),
-              height: height,
-              r: 2,
-            },
-            style: {
-              ...api.style(),
-              fill: COLORS[categoryIndex % COLORS.length],
-            },
-          };
+            return {
+              type: 'rect',
+              shape: {
+                x: start[0],
+                y: start[1] - height / 2,
+                width: Math.max(end[0] - start[0], 3),
+                height: height,
+                r: 2,
+              },
+              style: {
+                ...api.style(),
+                fill: COLORS[categoryIndex % COLORS.length],
+              },
+            };
+          },
+          data,
         },
-        data,
-      }}
+      ]}
     />
   );
 }

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 export interface ChartProps {
   options: echarts.EChartsOption;
-  series: echarts.SeriesOption;
+  series: echarts.SeriesOption[];
   className?: string;
 }
 
@@ -69,7 +69,7 @@ export const Chart = memo(
         }
       });
 
-      chart.setOption({ ...options, series: [series] });
+      chart.setOption({ ...options, series });
       observer.observe(element);
 
       return () => observer.disconnect();
