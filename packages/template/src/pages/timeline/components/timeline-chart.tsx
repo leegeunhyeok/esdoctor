@@ -38,7 +38,6 @@ export function TimelineChart({
             return [
               `${value[2]}`,
               `Trace count: ${value[3]}`,
-              `Total duration: ${formatNumberWithDecimal(value[1] - value[0])}ms`,
               `Started from: ${formatNumberWithDecimal(value[0])} ms`,
               `Ended at: ${formatNumberWithDecimal(value[1])} ms`,
             ].join('<br>');
