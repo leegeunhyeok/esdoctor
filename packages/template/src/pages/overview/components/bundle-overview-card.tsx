@@ -84,16 +84,27 @@ export function BundleOverviewCard() {
                 className="grid grid-cols-5 items-center"
               >
                 <div />
-                <div className="col-span-4 flex flex-row items-center justify-between text-sm text-gray-400">
+                <div className="col-span-4 flex flex-row items-center justify-between gap-2 text-sm text-gray-400">
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <p>{bytesToText(output.bytes)}</p>
+                      <p className="flex-shrink-0 whitespace-nowrap">
+                        {bytesToText(output.bytes)}
+                      </p>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>{formatInteger(output.bytes)} bytes</p>
                     </TooltipContent>
                   </Tooltip>
-                  <p>{output.filename}</p>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <p className="flex-1 overflow-hidden text-right text-ellipsis whitespace-nowrap">
+                        {output.filename?.split('/')?.pop()}
+                      </p>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{output.filename}</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             ))}

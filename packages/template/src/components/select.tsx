@@ -15,6 +15,8 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { Tooltip } from '@radix-ui/react-tooltip';
+import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface SelectProps {
   items: {
@@ -41,7 +43,9 @@ export function Select({ items, placeholder, onSelect }: SelectProps) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {items.find((item) => item.value === value)?.label}
+          <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+            {items.find((item) => item.value === value)?.label}
+          </p>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -69,7 +73,9 @@ export function Select({ items, placeholder, onSelect }: SelectProps) {
                       value === item.value ? 'opacity-100' : 'opacity-0',
                     )}
                   />
-                  {item.label}
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {item.label}
+                  </p>
                 </CommandItem>
               ))}
             </CommandGroup>

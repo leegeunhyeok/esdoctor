@@ -6,11 +6,12 @@ interface CodeProps {
   code: string;
   language?: string;
   className?: string;
+  customStyle?: React.CSSProperties;
 }
 
 const SyntaxHighlighter = Prism as unknown as React.FC<SyntaxHighlighterProps>;
 
-export function Code({ code, language, className }: CodeProps) {
+export function Code({ code, language, className, customStyle }: CodeProps) {
   return (
     <div className={cn(className, 'overflow-x-auto')}>
       <SyntaxHighlighter
@@ -19,6 +20,7 @@ export function Code({ code, language, className }: CodeProps) {
           margin: 0,
           overflowX: 'auto',
           overflowY: 'visible',
+          ...customStyle,
         }}
         style={oneLight}
         codeTagProps={{ className: 'block text-xs' }}
