@@ -1672,7 +1672,7 @@ __metadata:
   dependencies:
     "@esdoctor/types": "workspace:*"
     "@types/node": "npm:^22"
-    esbuild: "npm:^0.24.2"
+    esbuild: "npm:^0.25.0"
     tsup: "npm:^8.3.6"
     typescript: "npm:5.7.3"
     vitest: "npm:^3.0.5"
@@ -1749,7 +1749,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     echarts: "npm:^5.6.0"
     es-toolkit: "npm:^1.32.0"
-    esbuild: "npm:^0.24.2"
+    esbuild: "npm:^0.25.0"
     linkedom: "npm:^0.18.9"
     lucide-react: "npm:^0.474.0"
     react: "npm:^18.2.0"
@@ -1776,7 +1776,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@esdoctor/types@workspace:packages/types"
   dependencies:
-    esbuild: "npm:^0.24.2"
+    esbuild: "npm:^0.25.0"
     typescript: "npm:5.7.3"
   languageName: unknown
   linkType: soft
