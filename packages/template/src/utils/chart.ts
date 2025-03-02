@@ -36,8 +36,8 @@ export function toChartData(
           return false;
         }
 
-        if (includeFilter?.test(path)) {
-          return true;
+        if (includeFilter != null) {
+          return includeFilter.test(path);
         }
 
         return true;

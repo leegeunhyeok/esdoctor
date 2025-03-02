@@ -5,7 +5,7 @@ import { isNotNil } from 'es-toolkit';
 export const tooltip = {
   className: cn('!bg-background', '!border', '!rounded-md', '!text-gray-1000'),
   formatter: (params) => {
-    const { path, value: bundledSize, size: originalSize } = params.data;
+    const { path, value: bundledSize, size: originalSize } = params.data ?? {};
     const isModule = typeof originalSize === 'number';
 
     if (path == null) {
