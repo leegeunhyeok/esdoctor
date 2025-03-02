@@ -36,7 +36,10 @@ export function useModuleReferenceTreeModalState() {
 
     const handleClick = (event: echarts.ECElementEvent) => {
       if (event.componentType === 'series' && event.data) {
-        timerRef.current && clearTimeout(timerRef.current);
+        if (typeof timerRef.current === 'number') {
+          clearTimeout(timerRef.current);
+        }
+
         const {
           path: modulePath,
           size: originSize,

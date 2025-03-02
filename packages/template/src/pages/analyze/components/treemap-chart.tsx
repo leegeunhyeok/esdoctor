@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Chart } from '@/src/components/chart';
 import type { ChartData } from '@/src/utils/chart';
 import { useTreemapSeries } from '../hooks/use-treemap-series';
@@ -22,7 +23,7 @@ export function TreemapChart({ data, options }: TreemapChartProps) {
       <Chart
         ref={chartRef}
         className="h-[70vh] bg-neutral-50"
-        series={[series]}
+        series={useMemo(() => [series], [series])}
         options={chartOptions}
       />
       <ModuleReferenceTreeModal
@@ -37,5 +38,4 @@ export function TreemapChart({ data, options }: TreemapChartProps) {
 
 const chartOptions: echarts.EChartsOption = {
   tooltip,
-  series: [],
 };
