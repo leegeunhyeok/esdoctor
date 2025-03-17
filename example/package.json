@@ -21,8 +21,8 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@esdoctor/plugin": "0.1.0-alpha.0",
-    "@esdoctor/template": "0.1.0-alpha.0",
+    "@esdoctor/plugin": "workspace:*",
+    "@esdoctor/template": "workspace:*",
     "@eslint/js": "^9.13.0",
     "@svgr/core": "^8.1.0",
     "@swc/core": "^1.10.18",

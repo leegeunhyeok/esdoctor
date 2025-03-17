@@ -1,9 +1,11 @@
+import type { HookTrace } from '@esdoctor/types';
+
 export type TimelineData = {
   start: number;
   end: number;
   duration: number;
   name: string;
   type: string;
-  data: Record<string, unknown>;
-  code?: string;
+  data: HookTrace['data'];
+  result: HookTrace['result'];
 };

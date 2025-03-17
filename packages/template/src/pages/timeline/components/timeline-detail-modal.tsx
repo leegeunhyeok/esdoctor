@@ -9,12 +9,13 @@ import { Code } from '@/src/components/code';
 import { formatNumberWithDecimal } from '@/src/utils/format';
 import { toJSON } from '@/src/utils/to-json';
 import type { TimelineData } from '../types';
+import { OnLoadResult } from 'esbuild';
 
 const CODE_MAX_LENGTH = 1024 * 20;
 
 export interface TimelineDetailModalProps {
   open: boolean;
-  details: Pick<TimelineData, 'start' | 'end' | 'data' | 'code'> | null;
+  details: Pick<TimelineData, 'start' | 'end' | 'data' | 'result'> | null;
   onOpenChange: (open: boolean) => void;
 }
 
@@ -26,6 +27,7 @@ export function TimelineDetailModal({
   const start = details?.start ?? 0;
   const end = details?.end ?? 0;
   const duration = end - start;
+  const code = (details?.result as OnLoadResult)?.contents?.toString();
 
   function renderCode(code: string, language: string) {
     if (code.length > CODE_MAX_LENGTH) {
@@ -79,7 +81,7 @@ export function TimelineDetailModal({
           details?.data ? toJSON(details.data) : '// No data',
           'json',
         )}
-        {details?.code ? renderCode(details.code, 'javascript') : null}
+        {code ? renderCode(code, 'javascript') : null}
       </DialogContent>
     </Dialog>
   );

@@ -8,6 +8,7 @@ export function downsampleTimelineData(data: TimelineData[]) {
     },
     {} as Record<string, number>,
   );
+
   const rangeData = data.reduce(
     (acc, { start, end, name, type }) => {
       const label = `${name}:${type}`;

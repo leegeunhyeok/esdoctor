@@ -3,17 +3,10 @@ import { groupBy } from 'es-toolkit';
 import { Chart } from '@/src/components/chart';
 import { formatNumberWithDecimal } from '@/src/utils/format';
 import { millisecondsToText } from '@/src/utils/time';
+import type { TimelineData } from '../types';
 
 interface DurationStackedBarChartProps {
-  data: {
-    start: number;
-    end: number;
-    duration: number;
-    name: string;
-    type: string;
-    data: Record<string, unknown>;
-    code?: string;
-  }[];
+  data: TimelineData[];
   traceNames: string[];
 }
 

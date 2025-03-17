@@ -11,7 +11,7 @@ export interface TimelineTraceTableProps {
 export function TimelineTraceTable({ data }: TimelineTraceTableProps) {
   const [traceDetails, setTraceDetails] = useState<Pick<
     TimelineData,
-    'start' | 'end' | 'data' | 'code'
+    'start' | 'end' | 'data' | 'result'
   > | null>(null);
 
   return (

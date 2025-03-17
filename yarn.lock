@@ -1657,16 +1657,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@esdoctor/plugin@npm:0.1.0-alpha.0":
-  version: 0.1.0-alpha.0
-  resolution: "@esdoctor/plugin@npm:0.1.0-alpha.0"
-  dependencies:
-    "@esdoctor/types": "npm:0.1.0-alpha.0"
-  checksum: 10c0/3f707e187c4f086854ff3d4bc75a6f367f42ba7f7193267241ecc3d3503e8165afc78550e91c0990e1dab4a1759a81c7c04ce1f0ebcf10120713c98e45ba727f
-  languageName: node
-  linkType: hard
-
-"@esdoctor/plugin@workspace:packages/plugin":
+"@esdoctor/plugin@workspace:*, @esdoctor/plugin@workspace:packages/plugin":
   version: 0.0.0-use.local
   resolution: "@esdoctor/plugin@workspace:packages/plugin"
   dependencies:
@@ -1678,40 +1669,6 @@ __metadata:
     vitest: "npm:^3.0.5"
   languageName: unknown
   linkType: soft
-
-"@esdoctor/template@npm:0.1.0-alpha.0":
-  version: 0.1.0-alpha.0
-  resolution: "@esdoctor/template@npm:0.1.0-alpha.0"
-  dependencies:
-    "@radix-ui/react-checkbox": "npm:^1.1.4"
-    "@radix-ui/react-dialog": "npm:^1.1.6"
-    "@radix-ui/react-dropdown-menu": "npm:^2.1.6"
-    "@radix-ui/react-label": "npm:^2.1.2"
-    "@radix-ui/react-navigation-menu": "npm:^1.2.5"
-    "@radix-ui/react-popover": "npm:^1.1.6"
-    "@radix-ui/react-progress": "npm:^1.1.2"
-    "@radix-ui/react-select": "npm:^2.1.6"
-    "@radix-ui/react-separator": "npm:^1.1.2"
-    "@radix-ui/react-slider": "npm:^1.2.3"
-    "@radix-ui/react-slot": "npm:^1.1.2"
-    "@radix-ui/react-tabs": "npm:^1.1.3"
-    "@radix-ui/react-tooltip": "npm:^1.1.8"
-    "@tanstack/react-table": "npm:^8.21.2"
-    class-variance-authority: "npm:^0.7.1"
-    clsx: "npm:^2.1.1"
-    cmdk: "npm:1.0.0"
-    echarts: "npm:^5.6.0"
-    es-toolkit: "npm:^1.32.0"
-    lucide-react: "npm:^0.474.0"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-syntax-highlighter: "npm:^15.6.1"
-    tailwind-merge: "npm:^3.0.1"
-    tailwindcss-animate: "npm:^1.0.7"
-    traverse: "npm:^0.6.11"
-  checksum: 10c0/7f9f764504fda016f425d0d333a0b62deae24ef22f535b996814b5f4b4b08d09c1ca65ed4e38723235030e1ac064e13913b775d4a7ced00419bd551ddcc6e9a9
-  languageName: node
-  linkType: hard
 
 "@esdoctor/template@workspace:*, @esdoctor/template@workspace:packages/template":
   version: 0.0.0-use.local
@@ -1764,13 +1721,6 @@ __metadata:
     typescript: "npm:^5.7.3"
   languageName: unknown
   linkType: soft
-
-"@esdoctor/types@npm:0.1.0-alpha.0":
-  version: 0.1.0-alpha.0
-  resolution: "@esdoctor/types@npm:0.1.0-alpha.0"
-  checksum: 10c0/85bf9135e55a7c39a005de29ef0220d77b91d25692d9c2d1b74047845ee68f7757a610456481b6d020112142b6b8dfda44bc9025c0c2f067c07b267daaeae5ac
-  languageName: node
-  linkType: hard
 
 "@esdoctor/types@workspace:*, @esdoctor/types@workspace:packages/types":
   version: 0.0.0-use.local
@@ -7730,8 +7680,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example@workspace:example"
   dependencies:
-    "@esdoctor/plugin": "npm:0.1.0-alpha.0"
-    "@esdoctor/template": "npm:0.1.0-alpha.0"
+    "@esdoctor/plugin": "workspace:*"
+    "@esdoctor/template": "workspace:*"
     "@eslint/js": "npm:^9.13.0"
     "@radix-ui/react-slot": "npm:^1.1.2"
     "@svgr/core": "npm:^8.1.0"

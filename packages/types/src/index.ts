@@ -85,5 +85,16 @@ export interface HookTrace {
   /**
    * Additional hook data
    */
-  data: Record<string, unknown> | undefined | null;
+  data: Nullable<Record<string, unknown>>;
+  /**
+   * Hook result
+   */
+  result: Nullable<
+    | esbuild.OnStartResult
+    | esbuild.OnResolveResult
+    | esbuild.OnLoadResult
+    | esbuild.OnEndResult
+  >;
 }
+
+type Nullable<T> = T | null | undefined;

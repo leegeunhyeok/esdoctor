@@ -11,7 +11,7 @@ import { getEnvironment } from './get-environment.js';
 import { toNormalizedObject } from './utils/to-normalized-object.js';
 
 interface PluginStateOptions {
-  collectHooksData: boolean;
+  collectHooksData?: boolean;
 }
 
 export class PluginState {
@@ -122,11 +122,11 @@ export class PluginState {
     let end: number;
 
     const perform = async () => {
-      let hookedResult: R | undefined;
+      let result: R | undefined;
       try {
-        hookedResult = await action();
+        result = await action();
         end = performance.now();
-        return hookedResult;
+        return result;
       } catch (error) {
         originStack && (error.stack = originStack);
         throw error;
@@ -140,10 +140,9 @@ export class PluginState {
             start,
             end,
           },
-          // Collect data only if the option is enabled
           data: this.options.collectHooksData ? config.data : undefined,
-          code: this.options.collectHooksData
-            ? (hookedResult as unknown as { contents?: string })?.contents
+          result: this.options.collectHooksData
+            ? (result as HookTrace['result'])
             : undefined,
         });
       }

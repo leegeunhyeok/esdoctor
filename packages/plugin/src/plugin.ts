@@ -86,6 +86,7 @@ function create(options: PluginOptions): {
 
 function withTrace(this: PluginState, plugin: Plugin): Plugin {
   const name = plugin.name;
+
   const setup: Plugin['setup'] = (build) => {
     return plugin.setup?.({
       ...build,
@@ -102,22 +103,16 @@ function withTrace(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(result), {
             type: 'onResolve',
             name,
-            data: {
-              options,
-              args: result,
-            },
+            data: { options, args: result },
           }).perform(),
         );
       },
       onLoad: (options, callback) => {
-        build.onLoad(options, (result) =>
-          this.withTrace(() => callback(result), {
+        build.onLoad(options, (args) =>
+          this.withTrace(() => callback(args), {
             type: 'onLoad',
             name,
-            data: {
-              options,
-              args: result,
-            },
+            data: { options, args },
           }).perform(),
         );
       },
