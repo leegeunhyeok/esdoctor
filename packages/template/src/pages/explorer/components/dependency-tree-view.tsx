@@ -168,7 +168,7 @@ export function DependencyTreeView() {
         </SheetHeader>
         <TooltipProvider>
           <div className="border-border flex h-full border-t">
-            <div className="border-border h-full w-[280px] overflow-auto border-r pr-2">
+            <div className="border-border h-full min-w-[280px] overflow-auto border-r">
               <FileTree
                 data={data}
                 focus={selectedFile}

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronDown, ChevronRight, File, Folder } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipProvider } from '@radix-ui/react-tooltip';
+import { TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export type GroupedPaths = (string | (string | GroupedPaths)[])[];
 
@@ -62,20 +64,22 @@ export function FileTree({
   const items = useMemo(() => parseFileTree(data), [data]);
 
   return (
-    <div className={cn('h-full overflow-auto', className)}>
-      <div className="h-full p-2">
-        {items.map((item) => (
-          <FileTreeNode
-            isParentExpanded={true}
-            key={item.path}
-            item={item}
-            focus={focus}
-            level={0}
-            onFileClick={onFileClick}
-          />
-        ))}
+    <TooltipProvider>
+      <div className={cn('h-full overflow-auto', className)}>
+        <div className="h-full p-2">
+          {items.map((item) => (
+            <FileTreeNode
+              isParentExpanded={true}
+              key={item.path}
+              item={item}
+              focus={focus}
+              level={0}
+              onFileClick={onFileClick}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
 
@@ -119,39 +123,53 @@ function FileTreeNode({
   return (
     <div>
       {isParentExpanded ? (
-        <div
-          className={cn(
-            'hover:bg-muted/50 flex cursor-pointer items-center rounded-md px-2 py-1',
-            isFocused && 'bg-gray-100 hover:bg-gray-100',
-          )}
-          style={{ paddingLeft: `${level * 6}px` }}
-          onClick={handleClick}
-          role="button"
-          tabIndex={0}
-          aria-expanded={item.isDirectory ? isExpanded : undefined}
-        >
-          {item.isDirectory ? (
-            <div className="flex items-center">
-              {isExpanded ? (
-                <ChevronDown className="text-muted-foreground mr-1 h-4 w-4 shrink-0" />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div
+              style={{ paddingLeft: `${level * 6}px` }}
+              onClick={handleClick}
+              role="button"
+              tabIndex={0}
+              aria-expanded={item.isDirectory ? isExpanded : undefined}
+            >
+              {item.isDirectory ? (
+                <div
+                  className={cn(
+                    'hover:bg-muted/50 flex cursor-pointer items-center rounded-md px-2 py-1',
+                    isFocused && 'bg-gray-100 hover:bg-gray-100',
+                  )}
+                >
+                  {isExpanded ? (
+                    <ChevronDown className="text-muted-foreground mr-1 h-4 w-4 shrink-0" />
+                  ) : (
+                    <ChevronRight className="text-muted-foreground mr-1 h-4 w-4 shrink-0" />
+                  )}
+                  <Folder className="mr-2 h-4 w-4 shrink-0 text-blue-400" />
+                  <span className="overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                    {item.name}
+                  </span>
+                </div>
               ) : (
-                <ChevronRight className="text-muted-foreground mr-1 h-4 w-4 shrink-0" />
+                <div
+                  className={cn(
+                    'hover:bg-muted/50 flex cursor-pointer items-center rounded-md px-2 py-1',
+                    isFocused && 'bg-gray-100 hover:bg-gray-100',
+                  )}
+                  onClick={handleClick}
+                >
+                  <span className="mr-1 w-4" />
+                  <File className="text-muted-foreground mr-2 h-4 w-4 shrink-0" />
+                  <span className="overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                    {item.name}
+                  </span>
+                </div>
               )}
-              <Folder className="mr-2 h-4 w-4 shrink-0 text-blue-400" />
-              <span className="overflow-hidden text-sm text-ellipsis whitespace-nowrap">
-                {item.name}
-              </span>
             </div>
-          ) : (
-            <div className="flex items-center" onClick={handleClick}>
-              <span className="mr-1 w-4" />
-              <File className="text-muted-foreground mr-2 h-4 w-4 shrink-0" />
-              <span className="overflow-hidden text-sm text-ellipsis whitespace-nowrap">
-                {item.name}
-              </span>
-            </div>
-          )}
-        </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{item.path}</p>
+          </TooltipContent>
+        </Tooltip>
       ) : null}
       {item.isDirectory && item.children && (
         <div>
