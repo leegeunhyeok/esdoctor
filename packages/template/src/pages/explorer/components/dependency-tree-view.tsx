@@ -114,14 +114,14 @@ export function DependencyTreeView() {
       <SheetTrigger asChild>
         <Button variant="outline">
           <Network />
-          Dependency Tree
+          Dependency Explorer
         </Button>
       </SheetTrigger>
       <SheetContent className="max-w-[100%] gap-0 sm:max-w-[850px]">
         <SheetHeader>
-          <SheetTitle>Dependency Tree</SheetTitle>
+          <SheetTitle>Dependency Explorer</SheetTitle>
           <SheetDescription>
-            Explore the dependency tree of your project.
+            Explore the dependencies of your project.
           </SheetDescription>
         </SheetHeader>
         <TooltipProvider>
