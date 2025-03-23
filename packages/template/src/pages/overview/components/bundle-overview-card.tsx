@@ -44,7 +44,7 @@ export function BundleOverviewCard() {
         <CardTitle>Bundle overview</CardTitle>
         <div
           className="flex cursor-pointer items-center gap-2"
-          onClick={() => setActiveTab('analyze')}
+          onClick={() => setActiveTab('explorer')}
         >
           <Label className="cursor-pointer text-gray-500">Analyze bundle</Label>
           <ChevronRight size={16} className="cursor-pointer text-gray-500" />

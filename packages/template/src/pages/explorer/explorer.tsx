@@ -17,6 +17,7 @@ import { toChartData } from '@/src/utils/chart';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TreemapChart } from './components/treemap-chart';
 import { SunburstChart } from './components/sunburst-chart';
+import { DependencyTreeView } from './components/dependency-tree-view';
 
 const metafile = window.__esdoctorDataSource.metafile;
 
@@ -50,7 +51,10 @@ export function Explorer() {
 
   return (
     <Page>
-      <Page.Header>Explorer</Page.Header>
+      <Page.Header className="flex items-center justify-between">
+        Explorer
+        <DependencyTreeView />
+      </Page.Header>
       <Page.Content>
         <Tabs defaultValue="treemap" onValueChange={setSelectedView}>
           <div className="flex items-center justify-between gap-2">
