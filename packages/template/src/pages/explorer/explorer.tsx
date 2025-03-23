@@ -20,7 +20,7 @@ import { SunburstChart } from './components/sunburst-chart';
 
 const metafile = window.__esdoctorDataSource.metafile;
 
-export function Analyze() {
+export function Explorer() {
   const [selectedView, setSelectedView] = useState('treemap');
   const [options, setOptions] = useState<ChartOptions>({});
 
@@ -50,7 +50,7 @@ export function Analyze() {
 
   return (
     <Page>
-      <Page.Header>Analyze</Page.Header>
+      <Page.Header>Explorer</Page.Header>
       <Page.Content>
         <Tabs defaultValue="treemap" onValueChange={setSelectedView}>
           <div className="flex items-center justify-between gap-2">
