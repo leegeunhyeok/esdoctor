@@ -1659,7 +1659,7 @@ __metadata:
     picocolors: "npm:^1.1.1"
     tsup: "npm:^8.3.6"
     tsx: "npm:^4.19.3"
-    typescript: "npm:^5.7.3"
+    typescript: "npm:5.7.3"
     yargs: "npm:^17.7.2"
   bin:
     esdoctor: ./dist/index.js
@@ -1704,8 +1704,8 @@ __metadata:
     "@rspack/plugin-react-refresh": "npm:1.0.0"
     "@tailwindcss/cli": "npm:^4.0.4"
     "@tanstack/react-table": "npm:^8.21.2"
-    "@types/node": "npm:^22.13.4"
-    "@types/react": "npm:^18.2.48"
+    "@types/node": "npm:^22"
+    "@types/react": "npm:18.3.18"
     "@types/react-dom": "npm:^18.2.18"
     "@types/react-syntax-highlighter": "npm:^15"
     "@types/react-virtualized": "npm:^9"
@@ -1721,8 +1721,8 @@ __metadata:
     esbuild: "npm:^0.25.0"
     linkedom: "npm:^0.18.9"
     lucide-react: "npm:^0.483.0"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
+    react: "npm:18.3.1"
+    react-dom: "npm:18.3.1"
     react-refresh: "npm:^0.14.0"
     react-syntax-highlighter: "npm:^15.6.1"
     react-virtualized-auto-sizer: "npm:^1.0.25"
@@ -1732,7 +1732,7 @@ __metadata:
     tailwindcss-animate: "npm:^1.0.7"
     traverse: "npm:^0.6.11"
     tsup: "npm:^8.3.6"
-    typescript: "npm:^5.7.3"
+    typescript: "npm:5.7.3"
     vaul: "npm:^1.1.2"
   languageName: unknown
   linkType: soft
@@ -5082,15 +5082,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.13.4":
-  version: 22.13.4
-  resolution: "@types/node@npm:22.13.4"
-  dependencies:
-    undici-types: "npm:~6.20.0"
-  checksum: 10c0/3a234fa7766a3efc382cf81f66f474c26cdab2f54f43f757634c81c0444eb2160c2dabbde9741e4983078a318a88515b65416b5f1ab5478548579d7b3ead1d95
-  languageName: node
-  linkType: hard
-
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
@@ -7739,7 +7730,7 @@ __metadata:
     "@swc/core": "npm:^1.10.18"
     "@tailwindcss/cli": "npm:^4.0.8"
     "@tailwindcss/vite": "npm:^4.0.8"
-    "@types/react": "npm:^18.3.11"
+    "@types/react": "npm:18.3.18"
     "@types/react-dom": "npm:^18.3.1"
     "@vitejs/plugin-react": "npm:^4.3.3"
     clsx: "npm:^2.1.1"
@@ -7749,12 +7740,12 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.13"
     globals: "npm:^15.11.0"
     lucide-react: "npm:^0.475.0"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
+    react: "npm:18.3.1"
+    react-dom: "npm:18.3.1"
     tailwind-merge: "npm:^3.0.1"
     tailwindcss: "npm:^4.0.8"
     tailwindcss-animate: "npm:^1.0.7"
-    typescript: "npm:~5.6.2"
+    typescript: "npm:5.7.3"
     typescript-eslint: "npm:^8.10.0"
     vite: "npm:^6"
     vite-tsconfig-paths: "npm:^5.1.4"
@@ -12632,7 +12623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.7.3, typescript@npm:^5.7.3":
+"typescript@npm:5.7.3":
   version: 5.7.3
   resolution: "typescript@npm:5.7.3"
   bin:
@@ -12642,33 +12633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.6.2":
-  version: 5.6.3
-  resolution: "typescript@npm:5.6.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/44f61d3fb15c35359bc60399cb8127c30bae554cd555b8e2b46d68fa79d680354b83320ad419ff1b81a0bdf324197b29affe6cc28988cd6a74d4ac60c94f9799
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.7.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>":
   version: 5.7.3
   resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/6fd7e0ed3bf23a81246878c613423730c40e8bdbfec4c6e4d7bf1b847cbb39076e56ad5f50aa9d7ebd89877999abaee216002d3f2818885e41c907caaa192cc4
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A~5.6.2#optional!builtin<compat/typescript>":
-  version: 5.6.3
-  resolution: "typescript@patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/7c9d2e07c81226d60435939618c91ec2ff0b75fbfa106eec3430f0fcf93a584bc6c73176676f532d78c3594fe28a54b36eb40b3d75593071a7ec91301533ace7
   languageName: node
   linkType: hard
 
