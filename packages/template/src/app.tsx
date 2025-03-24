@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { NavBar } from './components/navbar';
 import { Overview } from './pages/overview';
-import { Explorer } from './pages/explorer';
+import { Analyze } from './pages/analyze';
 import { Timeline } from './pages/timeline';
 import { TabProvider, useTab } from './hooks/use-tab';
 
@@ -17,9 +17,9 @@ const pages = [
     component: memo(Timeline),
   },
   {
-    id: 'explorer',
-    label: 'Explorer',
-    component: memo(Explorer),
+    id: 'analyze',
+    label: 'Analyze',
+    component: memo(Analyze),
   },
 ];
 

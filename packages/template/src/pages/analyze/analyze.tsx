@@ -21,7 +21,7 @@ import { DependencyTreeView } from './components/dependency-tree-view';
 
 const metafile = window.__esdoctorDataSource.metafile;
 
-export function Explorer() {
+export function Analyze() {
   const [selectedView, setSelectedView] = useState('treemap');
   const [options, setOptions] = useState<ChartOptions>({});
 
@@ -52,7 +52,7 @@ export function Explorer() {
   return (
     <Page>
       <Page.Header className="flex items-center justify-between">
-        Explorer
+        Analyze
         <DependencyTreeView />
       </Page.Header>
       <Page.Content>
