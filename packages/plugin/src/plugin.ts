@@ -95,15 +95,18 @@ function withTrace(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(), {
             type: 'onStart',
             name,
+            args: null,
+            options: null,
           }).perform(),
         );
       },
       onResolve: (options, callback) => {
-        build.onResolve(options, (result) =>
-          this.withTrace(() => callback(result), {
+        build.onResolve(options, (args) =>
+          this.withTrace(() => callback(args), {
             type: 'onResolve',
             name,
-            data: { options, args: result },
+            options,
+            args,
           }).perform(),
         );
       },
@@ -112,7 +115,8 @@ function withTrace(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(args), {
             type: 'onLoad',
             name,
-            data: { options, args },
+            options,
+            args,
           }).perform(),
         );
       },
@@ -121,6 +125,8 @@ function withTrace(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(), {
             type: 'onDispose',
             name,
+            args: null,
+            options: null,
           }).perform(),
         );
       },
@@ -129,6 +135,8 @@ function withTrace(this: PluginState, plugin: Plugin): Plugin {
           this.withTrace(() => callback(result), {
             type: 'onEnd',
             name,
+            args: null,
+            options: null,
           }).perform(),
         );
       },

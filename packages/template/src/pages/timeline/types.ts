@@ -6,6 +6,8 @@ export type TimelineData = {
   duration: number;
   name: string;
   type: string;
-  data: HookTrace['data'];
   result: HookTrace['result'];
+  args: HookTrace['args'];
+  options: HookTrace['options'];
+  data: HookTrace['data'];
 };

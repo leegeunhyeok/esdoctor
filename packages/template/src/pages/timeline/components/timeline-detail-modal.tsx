@@ -15,7 +15,10 @@ const CODE_MAX_LENGTH = 1024 * 20;
 
 export interface TimelineDetailModalProps {
   open: boolean;
-  details: Pick<TimelineData, 'start' | 'end' | 'data' | 'result'> | null;
+  details: Pick<
+    TimelineData,
+    'start' | 'end' | 'args' | 'options' | 'result' | 'data'
+  > | null;
   onOpenChange: (open: boolean) => void;
 }
 
@@ -63,6 +66,8 @@ export function TimelineDetailModal({
     return <Code code={code} language={language} />;
   }
 
+  console.log(details);
+
   return (
     <Dialog modal open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[75%] w-full overflow-y-auto sm:max-w-[750px]">
@@ -77,11 +82,33 @@ export function TimelineDetailModal({
             ms)
           </span>
         </div>
-        {renderCode(
-          details?.data ? toJSON(details.data) : '// No data',
-          'json',
-        )}
-        {code ? renderCode(code, 'javascript') : null}
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold">Options</p>
+          {renderCode(
+            details?.options ? toJSON(details.options) : '// No options',
+            'json',
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold">Arguments</p>
+          {renderCode(
+            details?.args ? toJSON(details.args) : '// No arguments',
+            'json',
+          )}
+        </div>
+        {code ? (
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-semibold">Transform result</p>
+            {renderCode(code, 'javascript')}
+          </div>
+        ) : null}
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold">Additional data</p>
+          {renderCode(
+            details?.data ? toJSON(details.data) : '// No additional data',
+            'json',
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

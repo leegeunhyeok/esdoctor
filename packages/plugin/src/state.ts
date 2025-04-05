@@ -106,17 +106,13 @@ export class PluginState {
     this.endedAt = new Date().getTime();
   }
 
-  withTrace<
-    R = unknown,
-    T extends Record<string, unknown> = Record<string, unknown>,
-  >(
+  withTrace<R = unknown>(
     action: () => R | Promise<R>,
-    config: {
-      type: HookTrace['type'];
+    config: Pick<HookTrace, 'type' | 'options' | 'args' | 'data'> & {
       name: string;
-      data?: T;
     },
   ) {
+    const collectHookData = this.options.collectHooksData;
     const originStack = new Error().stack;
     const start = performance.now();
     let end: number;
@@ -135,15 +131,23 @@ export class PluginState {
         this.traceList.push({
           type: config.type,
           name: config.name,
+          data: config.data,
           duration: {
             total: end - start,
             start,
             end,
           },
-          data: this.options.collectHooksData ? config.data : undefined,
-          result: this.options.collectHooksData
-            ? (result as HookTrace['result'])
-            : undefined,
+          ...(collectHookData
+            ? {
+                args: config.args,
+                options: config.options,
+                result: result as HookTrace['result'],
+              }
+            : {
+                args: null,
+                options: null,
+                result: null,
+              }),
         });
       }
     };

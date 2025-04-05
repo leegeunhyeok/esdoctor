@@ -20,8 +20,10 @@ export function createTimelineData(traceList: HookTrace[]) {
       start: trace.duration.start,
       end: trace.duration.end,
       duration: trace.duration.end - trace.duration.start,
-      data: trace.data,
+      options: trace.options,
+      args: trace.args,
       result: trace.result,
+      data: trace.data,
     } as TimelineData;
   });
 

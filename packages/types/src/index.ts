@@ -83,18 +83,20 @@ export interface HookTrace {
     total: number;
   };
   /**
-   * Additional hook data
+   * Hook data
    */
-  data: Nullable<Record<string, unknown>>;
-  /**
-   * Hook result
-   */
+  options: Nullable<esbuild.OnLoadOptions | esbuild.OnResolveOptions>;
+  args: Nullable<esbuild.OnLoadArgs | esbuild.OnResolveArgs>;
   result: Nullable<
     | esbuild.OnStartResult
     | esbuild.OnResolveResult
     | esbuild.OnLoadResult
     | esbuild.OnEndResult
   >;
+  /**
+   * Additional hook data
+   */
+  data?: Nullable<Record<string, unknown>>;
 }
 
 type Nullable<T> = T | null | undefined;
