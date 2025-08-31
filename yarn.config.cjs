@@ -3,11 +3,12 @@ const { defineConfig } = require('@yarnpkg/types');
 
 const reactPackages = ['react', 'react-dom'];
 const reactVersion = '18.3.1';
+const typescriptVersion = '5.9.2';
 
 module.exports = defineConfig({
   async constraints({ Yarn }) {
     for (const dep of Yarn.dependencies({ ident: 'typescript' })) {
-      dep.update('5.7.3');
+      dep.update(typescriptVersion);
     }
 
     for (const dep of Yarn.dependencies({ ident: '@types/node' })) {

@@ -10,7 +10,7 @@ import {
 import { CornerDownRight, Network, X } from 'lucide-react';
 import { FileTree } from './file-tree';
 import { useMemo, useState } from 'react';
-import { FixedSizeList } from 'react-window';
+import { List, type RowComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { bytesToText } from '@/src/utils/filesize';
 import {
@@ -24,6 +24,8 @@ import { cn } from '@/lib/utils';
 import { Metafile } from '@esdoctor/types';
 import { createFileTreeData } from '../helpers/create-file-tree-data';
 import { formatInteger } from '@/src/utils/format';
+
+type MetafileImports = Metafile['metafile']['inputs'][string]['imports'];
 
 const data = createFileTreeData(
   Object.keys(window.__esdoctorDataSource.metafile.inputs),
@@ -114,10 +116,10 @@ export function DependencyTreeView() {
   };
 
   const renderDependencies = (
-    imports: Metafile['metafile']['inputs'][string]['imports'],
+    imports: MetafileImports,
   ) => {
-    function DependencyRow({ index, style, data }) {
-      const value = data[index];
+    function DependencyRow({ index, style, datas }: RowComponentProps<{ datas: MetafileImports }>) {
+      const value = datas[index];
       const module = window.__esdoctorDataSource.metafile.inputs[value.path];
 
       return (
@@ -165,15 +167,13 @@ export function DependencyTreeView() {
     ) : (
       <AutoSizer>
         {({ width, height }) => (
-          <FixedSizeList
-            itemData={imports}
-            itemSize={30}
-            width={width}
-            height={height}
-            itemCount={imports.length}
-          >
-            {DependencyRow}
-          </FixedSizeList>
+          <List
+            rowHeight={30}
+            style={{ width, height }}
+            rowProps={{ datas: imports }}
+            rowCount={imports.length}
+            rowComponent={DependencyRow}
+          />
         )}
       </AutoSizer>
     );

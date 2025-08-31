@@ -1,6 +1,6 @@
 {
   "name": "esdoctor",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.9.4",
   "workspaces": [
     "packages/*",
     "example"
@@ -10,28 +10,27 @@
     "prepare": "yarn workspace example build:esdoctor && yarn cp:cli && yarn cp:template",
     "cp:cli": "yarn workspace example exec cp esdoctor.json ../packages/cli/esdoctor.json",
     "cp:template": "yarn workspace example exec cp esdoctor.json ../packages/template/esdoctor.json",
-    "build": "nx run-many -t build"
+    "build:all": "nx run-many -t build",
+    "typecheck:all": "nx run-many -t typecheck"
   },
   "devDependencies": {
-    "@nx/js": "20.4.0",
-    "@swc-node/register": "~1.9.1",
-    "@swc/core": "~1.5.7",
-    "@swc/helpers": "~0.5.11",
+    "@nx/js": "21.4.1",
+    "@swc-node/register": "^1.11.1",
+    "@swc/core": "^1.13.5",
+    "@swc/helpers": "^0.5.17",
     "@types/node": "^22",
-    "@yarnpkg/types": "^4.0.0",
-    "knip": "^5.44.4",
-    "nx": "20.4.0",
-    "oxlint": "^0.15.9",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "5.7.3"
-  },
-  "engines": {
-    "node": ">=22"
+    "@yarnpkg/types": "^4.0.1",
+    "knip": "^5.63.0",
+    "nx": "21.4.1",
+    "oxlint": "^1.13.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "5.9.2"
   },
   "resolutions": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "@types/react": "18.3.18"
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "@types/react": "19.1.12",
+    "vite": "npm:rolldown-vite@latest"
   }
 }
