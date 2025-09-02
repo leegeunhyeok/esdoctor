@@ -1,6 +1,7 @@
 import type { HookTrace } from '@esdoctor/types';
 
 export type TimelineData = {
+  label: string;
   start: number;
   end: number;
   duration: number;

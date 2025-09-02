@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseHTML } from 'linkedom';
 import { BUNDLE_NAME, HTML_TEMPLATE, CSS_NAME } from './shared.mjs';
+import { createDataSource } from './data';
 import type * as esdoctor from '@esdoctor/types';
 
 let htmlCache: string | null = null;
@@ -31,7 +32,7 @@ export async function generateTemplate(metafile: esdoctor.Metafile) {
   script.removeAttribute('src');
   script.setAttribute('type', 'application/javascript');
   script.textContent = [
-    `window.__esdoctorDataSource=${normalize(metafile)};`,
+    `window.__esdoctorDataSource=${createDataSource(metafile)};`,
     bundle,
   ].join('\n');
 
@@ -41,8 +42,4 @@ export async function generateTemplate(metafile: esdoctor.Metafile) {
   document.head.appendChild(style);
 
   return document.toString();
-}
-
-function normalize(metafile: esdoctor.Metafile) {
-  return JSON.stringify(metafile);
 }

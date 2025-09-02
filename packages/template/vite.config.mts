@@ -1,15 +1,15 @@
-
 import fs from 'node:fs/promises';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import { createDataSource } from './data';
+import type * as esdoctor from '@esdoctor/types';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-
-function loadMetafile() {
-  return fs.readFile('./esdoctor.json', 'utf-8').catch((error) => {
+async function loadMetafile() {
+  const raw = await fs.readFile('./esdoctor.json', 'utf-8').catch((error) => {
     if (error.code === 'ENOENT') {
       console.error('Metafile is not found');
       console.error(
@@ -19,6 +19,8 @@ function loadMetafile() {
     }
     throw error;
   });
+
+  return JSON.parse(raw) as esdoctor.Metafile;
 }
 
 // https://vite.dev/config/
@@ -36,7 +38,7 @@ export default defineConfig({
   define: {
     global: 'globalThis',
     'process.env.METAFILE': JSON.stringify(
-      isDev ? await loadMetafile() : null,
+      isDev ? createDataSource(await loadMetafile()) : null,
     ),
   },
   plugins: [react(), tailwindcss()],

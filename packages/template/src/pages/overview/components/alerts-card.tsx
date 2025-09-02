@@ -3,13 +3,12 @@ import { AlertFilterModal } from './alert-filter-modal';
 import { Smile } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { generatedWarnings } from '@/src/utils/generate-warnings';
 import { cn } from '@/lib/utils';
 import { useMemo, useState } from 'react';
 
 const alerts = [
   ...window.__esdoctorDataSource.alerts,
-  ...generatedWarnings.map((message) => ({
+  ...window.__esdoctorDataSource.processed.warnings.map((message) => ({
     type: 'warning',
     text: message,
   })),

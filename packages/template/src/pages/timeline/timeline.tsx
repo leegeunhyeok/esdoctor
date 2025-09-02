@@ -2,12 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Page } from '@/src/components/page';
 import { TimelineChart } from './components/timeline-chart';
 import { TimelineTraceTable } from './components/timeline-trace-table';
-import { createTimelineData } from './helpers/create-timeline-data';
 import { downsampleTimelineData } from './helpers/downsample-timeline-data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DurationStackedBarChart } from './components/duration-stacked-bar-chart';
 
-const data = createTimelineData(window.__esdoctorDataSource.traceList);
+const data = window.__esdoctorDataSource.processed.timelineData;
 const downsampledData = downsampleTimelineData(data.timelineData);
 
 export function Timeline() {

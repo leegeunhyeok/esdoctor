@@ -22,14 +22,11 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Metafile } from '@esdoctor/types';
-import { createFileTreeData } from '../helpers/create-file-tree-data';
 import { formatInteger } from '@/src/utils/format';
 
 type MetafileImports = Metafile['metafile']['inputs'][string]['imports'];
 
-const data = createFileTreeData(
-  Object.keys(window.__esdoctorDataSource.metafile.inputs),
-);
+const data = window.__esdoctorDataSource.processed.fileTree;
 
 export function DependencyTreeView() {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -115,10 +112,12 @@ export function DependencyTreeView() {
     }
   };
 
-  const renderDependencies = (
-    imports: MetafileImports,
-  ) => {
-    function DependencyRow({ index, style, datas }: RowComponentProps<{ datas: MetafileImports }>) {
+  const renderDependencies = (imports: MetafileImports) => {
+    function DependencyRow({
+      index,
+      style,
+      datas,
+    }: RowComponentProps<{ datas: MetafileImports }>) {
       const value = datas[index];
       const module = window.__esdoctorDataSource.metafile.inputs[value.path];
 

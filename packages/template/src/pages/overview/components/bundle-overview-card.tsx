@@ -14,21 +14,18 @@ import { ChevronRight, HardDrive } from 'lucide-react';
 
 const metafile = window.__esdoctorDataSource.metafile;
 const modules = window.__esdoctorDataSource.moduleStatus;
-const outputs = Object.entries(metafile.outputs).map(([path, output]) => ({
-  bytes: output.bytes,
-  filename: path.split('/').pop(),
-}));
-const totalSize = outputs.reduce((acc, output) => acc + output.bytes, 0);
-const modulesTotal = Object.values(modules).reduce(
-  (prev, value) => prev + value,
-  0,
-);
-
+const totalSize = window.__esdoctorDataSource.processed.totalSize;
+const modulesTotal = window.__esdoctorDataSource.processed.totalModulesSize;
 const moduleStatus = [
   { label: 'ESM', value: modules.esm },
   { label: 'CJS', value: modules.cjs },
   { label: 'Unknown', value: modules.unknown },
 ].filter(({ value }) => value > 0);
+
+const outputs = Object.entries(metafile.outputs).map(([path, output]) => ({
+  bytes: output.bytes,
+  filename: path.split('/').pop(),
+}));
 
 const toPercentage = (value: number, minLimit = false) => {
   const percentage = (value / modulesTotal) * 100;

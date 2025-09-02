@@ -3,17 +3,17 @@ import { Separator } from '@/components/ui/separator';
 import { formatInteger } from '@/src/utils/format';
 import { Blocks, CircleX, TriangleAlert } from 'lucide-react';
 import { BuildConfigModal } from './build-config-modal';
-import { generatedWarnings } from '@/src/utils/generate-warnings';
 
-const moduleCount = Object.keys(
-  window.__esdoctorDataSource.metafile.inputs,
-).length;
+const moduleCount = window.__esdoctorDataSource.processed.moduleCount;
 const messageCount = window.__esdoctorDataSource.alerts.reduce(
   (prev, { type }) =>
     type === 'error'
       ? { ...prev, errors: prev.errors + 1 }
       : { ...prev, warnings: prev.warnings + 1 },
-  { errors: 0, warnings: generatedWarnings.length },
+  {
+    errors: 0,
+    warnings: window.__esdoctorDataSource.processed.warnings.length,
+  },
 );
 
 export function ProjectOverviewCart() {
